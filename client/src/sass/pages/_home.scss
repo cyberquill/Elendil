@@ -1,0 +1,10 @@
+
+.home {
+    width: 100%;
+	height: 100vh;
+    color: white;
+    
+    background: linear-gradient(135deg, #aedf00,#23d549, #23D5AB, #23A6D5, #0575e6, #ff00cc, #000);
+	background-size: 250% 250%;
+	animation: Gradient 12s ease infinite;
+}

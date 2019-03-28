@@ -1,0 +1,25 @@
+{
+    "name": "elendil",
+    "version": "1.0.0",
+    "description": "An E-Learning website, based on the 'MERN' stack.",
+    "main": "index.js",
+    "scripts": {
+        "client": "cd client && npm start",
+        "server": "cd server && npm start",
+        "start": "run-p server client"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Brijgopal/Elendil.git"
+    },
+    "keywords": [],
+    "author": "Brijgopal Bharadwaj",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Brijgopal/Elendil/issues"
+    },
+    "homepage": "https://github.com/Brijgopal/Elendil#readme",
+    "devDependencies": {
+        "npm-run-all": "^4.1.5"
+    }
+}

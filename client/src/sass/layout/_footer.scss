@@ -1,0 +1,18 @@
+
+.footer {
+    display: flex;
+    height: 10vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+
+    &__link {
+        
+        color: white;
+        &:hover {
+            color: white;
+            border-bottom: 1px dotted white;
+        }
+    }
+}
