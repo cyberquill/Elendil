@@ -10,6 +10,7 @@ module.exports = function (req,res, next) {
 
     data.email = !isEmpty(data.email) ? data.email : '';
     data.password = !isEmpty(data.password) ? data.password : '';
+    data.role = !isEmpty(data.role) ? data.role : '';
     
     if (!validator.isEmail(data.email)) {
         errors.email = 'Email is invalid!';
@@ -25,6 +26,14 @@ module.exports = function (req,res, next) {
     
     if (validator.isEmpty(data.password)) {
         errors.password = 'Password field is required!';
+    }
+
+    if (validator.isIn(data.role, [['Student', 'Instructor']])) {
+        errors.role = 'Please specify a valid role!';
+    }
+
+    if (validator.isEmpty(data.role)) {
+        errors.role = 'Please select a role!';
     }
 
     if (!isEmpty(errors))

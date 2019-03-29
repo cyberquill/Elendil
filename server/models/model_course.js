@@ -4,10 +4,27 @@ const Schema = mongoose.Schema;
 const courseSchema = new Schema({
     price: { type: Number, required: true },
     about: { type: String, required: true },
-    instructors: [{ type: Schema.Types.ObjectId, ref: Instructor, required: true }],
-    students: [{ type: Schema.Types.ObjectId, ref: Student, required: true }],
-    lectures: [{ type: Schema.Types.ObjectId, ref: Lecture, required: true }],
-    questions: [{ type: Schema.Types.ObjectId, ref: Question, required: true }],
+    logo: { type: String, required: true },
+    cover: { type: String, required: true },
+    iid: { type: Schema.Types.ObjectId, ref: 'Instructor', required: true },
+});
+
+courseSchema.virtual('students', {
+    ref: 'Student',
+    localField: '_id',
+    foreignField: 'cid'
+});
+
+courseSchema.virtual('lectures', {
+    ref: 'Lecture',
+    localField: '_id',
+    foreignField: 'cid'
+});
+
+courseSchema.virtual('questions', {
+    ref: 'Question',
+    localField: '_id',
+    foreignField: 'cid'
 });
 // ============================================================================
 module.exports = mongoose.model('Course', courseSchema);
