@@ -17,10 +17,10 @@ const validateLoginInput = require('../../validation/login');
 
 router.post('/signup', validateRegisterInput, async (req, res) => {
     let { name, email, password, gender, role, profilePic } = req.body;
-    const user = await User.find({ email, role });
+    const user = await User.findOne({ email, role });
     if (user)
         return res.status(400).json({ email: 'Email already registered!' });
-
+    
     let newUser = new User({ name, email, gender, role, profilePic });
 
     bcrypt.genSalt(10, (err, salt) => {
@@ -39,8 +39,9 @@ router.post('/signup', validateRegisterInput, async (req, res) => {
 
 router.post('/login', validateLoginInput, async (req, res) => {
     const { email, role, password } = req.body;
-    const user = await User.find({ email, role });
-    if (!user) return res.status(404).json({ email: 'User not found!' });
+    const user = await User.findOne({ email, role });
+    if (!user)
+        return res.status(404).json({ email: 'User not found!' });
 
     const matched = await bcrypt.compare(password, user.password);
     if (!matched)
@@ -70,11 +71,7 @@ router.get(
     '/current',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
-        res.json({
-            id: req.user.id,
-            name: req.user.name,
-            email: req.user.email,
-        });
+        res.json(req.user);
     },
 );
 //==========================================================================

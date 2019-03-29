@@ -3,9 +3,11 @@ const Schema = mongoose.Schema;
 // ============================================================================
 const courseSchema = new Schema({
     price: { type: Number, required: true },
+    title: { type: String, required: true },
     about: { type: String, required: true },
     logo: { type: String, required: true },
     cover: { type: String, required: true },
+    suggestions: [String],
     iid: { type: Schema.Types.ObjectId, ref: 'Instructor', required: true },
 });
 

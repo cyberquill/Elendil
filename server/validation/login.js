@@ -28,7 +28,7 @@ module.exports = function (req,res, next) {
         errors.password = 'Password field is required!';
     }
 
-    if (validator.isIn(data.role, [['Student', 'Instructor']])) {
+    if (!validator.isIn(data.role, ['Student', 'Instructor'])) {
         errors.role = 'Please specify a valid role!';
     }
 

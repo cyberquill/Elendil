@@ -45,7 +45,7 @@ module.exports = function(req, res, next) {
         errors.password2 = 'Confirm password field is required!';
     }
 
-    if (validator.isIn(data.gender, [['M', 'F', 'O']])) {
+    if (!validator.isIn(data.gender, ['M', 'F', 'O'])) {
         errors.gender = 'Please specify a valid gender!';
     }
 
@@ -53,7 +53,7 @@ module.exports = function(req, res, next) {
         errors.gender = 'Please select a Gender!';
     }
 
-    if (validator.isIn(data.role, [['Student', 'Instructor']])) {
+    if (!validator.isIn(data.role, ['Student', 'Instructor'])) {
         errors.role = 'Please specify a valid role!';
     }
 
