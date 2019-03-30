@@ -34,14 +34,8 @@ class SignUp extends Component {
     //==========================================================================
     onSubmit = async (e) => {
         e.preventDefault();
-        e.persist();
-
-        // Gender Assignment:
-        if (e.target[5].checked) await this.setState({ gender: 'M' });
-        else if (e.target[6].checked) await this.setState({ gender: 'F' });
-        else if (e.target[7].checked) await this.setState({ gender: 'O' });
-
-        this.props.createUser(this.state, this.props.history);
+        const { errors, ...newUser } = this.state;
+        this.props.createUser(newUser, this.props.history);
     };
     //==========================================================================
     onChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -125,6 +119,8 @@ class SignUp extends Component {
                                 className="form__radio-input"
                                 id="male"
                                 name="gender"
+                                value="M"
+                                onChange={this.onChange}
                             />
                             <label htmlFor="male" className="form__radio-label">
                                 <span className="form__radio-button" />
@@ -138,6 +134,8 @@ class SignUp extends Component {
                                 className="form__radio-input"
                                 id="female"
                                 name="gender"
+                                value="F"
+                                onChange={this.onChange}
                             />
                             <label
                                 htmlFor="female"
@@ -153,6 +151,8 @@ class SignUp extends Component {
                                 className="form__radio-input"
                                 id="other"
                                 name="gender"
+                                value="O"
+                                onChange={this.onChange}
                             />
                             <label
                                 htmlFor="other"
@@ -167,6 +167,45 @@ class SignUp extends Component {
                             'form__invalid--msg': errors.gender,
                         })}>
                         {errors.gender}
+                    </div>
+
+                    <div className="form__radio-group">
+                        <input
+                            type="radio"
+                            className="form__radio-input"
+                            id="Student"
+                            name="role"
+                            value="Student"
+                            onChange={this.onChange}
+                        />
+                        <label htmlFor="Student" className="form__radio-label">
+                            <span className="form__radio-button" />
+                            Student
+                        </label>
+                    </div>
+
+                    <div className="form__radio-group">
+                        <input
+                            type="radio"
+                            className="form__radio-input"
+                            id="Instructor"
+                            name="role"
+                            value="Instructor"
+                            onChange={this.onChange}
+                        />
+                        <label
+                            htmlFor="Instructor"
+                            className="form__radio-label">
+                            <span className="form__radio-button" />
+                            Instructor
+                        </label>
+                    </div>
+
+                    <div
+                        className={classnames('', {
+                            'form__invalid--msg': errors.role,
+                        })}>
+                        {errors.role}
                     </div>
 
                     <input type="hidden" name="_gotcha" />

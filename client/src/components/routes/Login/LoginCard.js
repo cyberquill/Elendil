@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import FormGroup from '../../layout/formGroup';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -12,6 +13,7 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
+            role: '',
             errors: {},
         };
 
@@ -20,18 +22,14 @@ class Login extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        
-        if (newProps.errors) 
-            this.setState({ errors: newProps.errors });
+        if (newProps.errors) this.setState({ errors: newProps.errors });
 
-        if (newProps.auth.isAuthenticated) 
-            this.props.history.push('/');
+        if (newProps.auth.isAuthenticated) this.props.history.push('/');
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        const { email, password } = this.state;
-        const user = { email, password };
+        const { errors, ...user } = this.state;
         this.props.loginUser(user);
     };
 
@@ -68,6 +66,43 @@ class Login extends Component {
                         error={errors.password}
                         others="mt-4 mb-5"
                     />
+                    <div className="form__radio-group">
+                        <input
+                            type="radio"
+                            className="form__radio-input"
+                            id="Student"
+                            name="role"
+                            value="Student"
+                            onChange={this.onChange}
+                        />
+                        <label htmlFor="Student" className="form__radio-label">
+                            <span className="form__radio-button" />
+                            Student
+                        </label>
+                    </div>
+
+                    <div className="form__radio-group">
+                        <input
+                            type="radio"
+                            className="form__radio-input"
+                            id="Instructor"
+                            name="role"
+                            value="Instructor"
+                            onChange={this.onChange}
+                        />
+                        <label
+                            htmlFor="Instructor"
+                            className="form__radio-label">
+                            <span className="form__radio-button" />
+                            Instructor
+                        </label>
+                    </div>
+                    <div
+                        className={classnames('', {
+                            'form__invalid--msg': errors.role,
+                        })}>
+                        {errors.role}
+                    </div>
 
                     <input type="hidden" name="_gotcha" />
 
@@ -89,4 +124,7 @@ const mapStatesToProps = (state) => ({
     errors: state.errors,
 });
 
-export default connect(mapStatesToProps,{ loginUser })(withRouter(Login));
+export default connect(
+    mapStatesToProps,
+    { loginUser },
+)(withRouter(Login));
