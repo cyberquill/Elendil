@@ -9,11 +9,13 @@ const instructorSchema = new Schema({
     insta: String,
     git: String,
     others: [String],
+    salary: {type: Number, default: 0},
+    nCourses: {type: Number, default: 0},
 });
 
 instructorSchema.virtual('courses', {
     ref: 'Course',
-    localField: '_id',
+    localField: 'uid',
     foreignField: 'iid'
 });
 // ============================================================================

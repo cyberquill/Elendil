@@ -8,25 +8,28 @@ const courseSchema = new Schema({
     logo: { type: String, required: true },
     cover: { type: String, required: true },
     suggestions: [String],
+    nStudents: { type: Number, default: 0 },
+    nLectures: { type: Number, default: 0 },
+    nQuestions: { type: Number, default: 0 },
     iid: { type: Schema.Types.ObjectId, ref: 'Instructor', required: true },
 });
 
 courseSchema.virtual('students', {
     ref: 'Student',
     localField: '_id',
-    foreignField: 'cid'
+    foreignField: 'cid',
 });
 
 courseSchema.virtual('lectures', {
     ref: 'Lecture',
     localField: '_id',
-    foreignField: 'cid'
+    foreignField: 'cid',
 });
 
 courseSchema.virtual('questions', {
     ref: 'Question',
     localField: '_id',
-    foreignField: 'cid'
+    foreignField: 'cid',
 });
 // ============================================================================
 module.exports = mongoose.model('Course', courseSchema);
