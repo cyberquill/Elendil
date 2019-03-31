@@ -9,7 +9,7 @@ import {
 export const createLecture = (newLecture, history) => dispatch => {
     axios
         .post('/api/lectures/create', newLecture)
-        .then(res => history.push('/'))
+        .then(res => history.push('/dashboard/course/'))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,

@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { ANSWERS_FETCHED, GET_ERRORS } from './types';
 
-export const createQuestion = (newAnswer, history) => dispatch => {
+export const createAnswer = (newAnswer, history) => dispatch => {
     axios
         .post('/api/answers/create', newAnswer)
-        .then(res => history.push('/'))
+        // .then(res => history.push('/dashboard/course'))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
@@ -20,12 +20,12 @@ export const getAnswers = qid => dispatch => {
             dispatch({
                 type: ANSWERS_FETCHED,
                 payload: res.data,
-            }),
+            })
         )
         .catch(err =>
             dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data,
+                type: ANSWERS_FETCHED,
+                payload: [],
             }),
         );
 };

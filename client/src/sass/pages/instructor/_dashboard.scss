@@ -1,20 +1,17 @@
 
 .card {
     width: 20%;
-    height: 20%;
+    height: 400px;
     padding: 10px;
     margin: 20px;
     display: inline-block;
     position: relative;
     
-    .card-img-parent {
-        height: 250px;
-        width: 100%;
-        overflow: hidden;
-        
-        .card-img {
-            transform: translateY(-25%);
-        }
+    
+    .card-img {
+        height: 70%;
+        object-fit: cover;
+        object-position: center;
     }
 }
 

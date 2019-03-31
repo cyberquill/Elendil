@@ -25,9 +25,7 @@ class DashCard extends Component {
         return (
             <Link to={link} onClick={this.clickHandler}>
                 <div className="card">
-                    <div className="card-img-parent">
-                        <img src={image} className="card-img" alt="" />
-                    </div>
+                    <img src={image} className="card-img" alt="" />
                     <div className="title">
                         <h3>{title}</h3>
                     </div>

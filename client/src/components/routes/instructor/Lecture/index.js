@@ -34,7 +34,7 @@ class Lecture extends Component {
     };
     //==========================================================================
     render() {
-        const {
+        let {
             name,
             sno,
             linkID,
@@ -42,7 +42,7 @@ class Lecture extends Component {
             description,
         } = this.props.lectures.activeLecture;
 
-        const lectureList = this.props.lectures.list.map((lecture, index) => (
+        let lectureList = this.props.lectures.list.map((lecture, index) => (
             <LectureCard
                 name={lecture.name}
                 index={index}
@@ -72,9 +72,9 @@ class Lecture extends Component {
                     </div>
                 </div>
                 <div className="lecture-right">
-                    <a href="#" className="lecture-right__btn">
+                    <Link to="/dashboard/course/lectures/create" className="lecture-right__btn">
                         Add Lectures
-                    </a>
+                    </Link>
                     <div className="lecture-right__lecList">
                         {lectureList}
                     </div>

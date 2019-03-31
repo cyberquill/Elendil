@@ -4,40 +4,27 @@ import { withRouter, Link } from 'react-router-dom';
 import isEmpty from '../../../../validation/isEmpty';
 import { getLectures } from '../../../../redux/actions/Lecture Actions';
 import { getQuestions } from '../../../../redux/actions/Question Actions';
+import { getAnswers } from '../../../../redux/actions/Answer Actions';
 
 class Course extends Component {
     //==========================================================================
-    constructor(props) {
-        super(props);
-
-        this.lecturesHandler = this.lecturesHandler.bind(this);
-        this.questionsHandler = this.questionsHandler.bind(this);
-    }
-    //==========================================================================
     componentWillMount() {
         if (isEmpty(this.props.activeCourse)) this.props.history.push('/login');
+
+        this.props.getLectures(this.props.activeCourse._id);
+        this.props.getQuestions(this.props.activeCourse._id);
     }
     //==========================================================================
     componentDidUpdate(prevProps) {
         if (!isEmpty(this.props.errors) && this.props.errors !== 'Unauthorized')
             this.setState({ errors: this.props.errors });
 
-        if (!isEmpty(this.props.activeLecture))
-            this.props.history.push('/dashboard/course/lectures');
-
-        if (!isEmpty(this.props.questions))
-            this.props.history.push('/dashboard/course/questions');
+        /* if (!isEmpty(this.props.questions)) {
+            this.props.questions.forEach(question => {
+                this.props.getAnswers(question._id);
+            });
+        } */
     }
-    //==========================================================================
-    lecturesHandler = e => {
-        e.preventDefault();
-        this.props.getLectures(this.props.activeCourse._id);
-    };
-    //==========================================================================
-    questionsHandler = e => {
-        e.preventDefault();
-        this.props.getQuestions(this.props.activeCourse._id);
-    };
     //==========================================================================
     render() {
         const {
@@ -92,14 +79,12 @@ class Course extends Component {
                     </Link>
                     <Link
                         to="/dashboard/course/lectures"
-                        className="course__btn"
-                        onClick={this.lecturesHandler}>
+                        className="course__btn">
                         View Lectures
                     </Link>
                     <Link
                         to="/dashboard/course/questions"
-                        className="course__btn"
-                        onClick={this.questionsHandler}>
+                        className="course__btn">
                         Q&A Section
                     </Link>
                 </div>
@@ -121,5 +106,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getLectures, getQuestions },
+    { getLectures, getQuestions, getAnswers },
 )(withRouter(Course));

@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import isEmpty from '../../../../validation/isEmpty';
 import { getCourses } from '../../../../redux/actions/Course Actions';
 import DashCard from './DashCard';
 
 class dashboard extends Component {
-    
     //==========================================================================
     componentWillMount() {
-        if(isEmpty(this.props.user))
-            this.props.history.push('/login');
-            
+        if (isEmpty(this.props.user)) this.props.history.push('/login');
+
         this.props.getCourses(this.props.user.id);
     }
     //==========================================================================
@@ -29,6 +27,11 @@ class dashboard extends Component {
 
         return (
             <section>
+                <Link
+                    to="/dashboard/course/create"
+                    className="btn btn-block btn-primary">
+                    Create Course
+                </Link>
                 <div className="cardGroup">{Cards}</div>
             </section>
         );

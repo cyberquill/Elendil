@@ -37,9 +37,9 @@ router.get('/of/:qid',
         const { answers } = await Question.findById(req.params.qid).populate('answers',null,null,{sort: {'sno': 1}});
 
         if(!answers)
-            res.json([]);
+            res.status(404).json([]);
         
-        const result = [];
+        /* const result = [];
         for(i=0; i<answers.length;i++)
         {
             const user = await User.findById(answers[i].uid).select('name email role profilePic -_id');
@@ -47,7 +47,8 @@ router.get('/of/:qid',
             data.user = { ...user._doc };
             result.push(data);
         }
-        res.json(result);
+        res.json(result); */
+        res.json(answers);
     }
 );
 // ============================================================================

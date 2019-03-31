@@ -1,5 +1,5 @@
 
-.signup {
+.signup, .data {
     padding: 5% 0;
 
     &__card {
@@ -17,13 +17,21 @@
     }
 }
 
+.data {
+    background: linear-gradient(to top, rgba(185, 185, 185, 0.801), rgba(161, 158, 158, 0.801)),
+    url(https://images.unsplash.com/photo-1553615738-d8e0829f1d61?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .login {
     padding: 6% 0;
     font-size: 0.9em;
 
     &__card {
-        width: 400px;
-        padding: 4% 0;
+        width: 450px;
+        padding: 5% 0;
 
         &__pic {
             width: 8vw;
@@ -47,7 +55,7 @@
     }
 }
 
-.signup, .login {
+.signup, .data, .login {
     height: 100%;
     width: 100%;
     

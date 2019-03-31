@@ -12,7 +12,10 @@ import Footer from './components/layout/Footer';
 
 import Dashboard from './components/routes/instructor/Dashboard';
 import Course from './components/routes/instructor/Course';
+import CourseCreate from './components/routes/instructor/Course/CourseCreate';
 import Lecture from './components/routes/instructor/Lecture';
+import LectureCreate from './components/routes/instructor/Lecture/LectureCreate';
+import QA from './components/routes/instructor/QA';
 
 import Home from './components/routes/Home';
 import SignUp from './components/routes/SignUp';
@@ -39,11 +42,13 @@ class App extends Component {
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/dashboard" component={Dashboard} />
                         <Route exact path="/dashboard/course" component={Course} />
+                        <Route exact path="/dashboard/course/create" component={CourseCreate} />
                         <Route exact path="/dashboard/course/lectures" component={Lecture} />
+                        <Route exact path="/dashboard/course/lectures/create" component={LectureCreate} />
+                        <Route exact path="/dashboard/course/questions" component={QA} />
                         <Route component={NotFound} />
                     </Switch>
                 </Router>
-                <Footer />
             </Provider>
         );
     }

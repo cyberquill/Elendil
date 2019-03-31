@@ -8,7 +8,7 @@ import {
 export const createQuestion = (newQuestion, history) => dispatch => {
     axios
         .post('/api/questions/create', newQuestion)
-        .then(res => history.push('/'))
+        // .then(res => history.push('/dashboard/course/questions'))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,

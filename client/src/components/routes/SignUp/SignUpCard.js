@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import isEmpty from '../../../validation/isEmpty';
 import { createUser } from '../../../redux/actions/Auth Actions';
 import FormGroup from '../../layout/formGroup';
 
 class SignUp extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             name: '',
@@ -25,19 +26,22 @@ class SignUp extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     //==========================================================================
-    componentWillReceiveProps(newProps) {
-        if (newProps.errors) {
-            this.setState({ errors: newProps.errors });
-        }
+    componentDidUpdate(prevProps) {
+        if (
+            !isEmpty(this.props.errors) &&
+            this.props.errors !== prevProps.errors &&
+            this.props.errors !== 'Unauthorized'
+        )
+            this.setState({ errors: this.props.errors });
     }
     //==========================================================================
-    onSubmit = (e) => {
+    onSubmit = e => {
         e.preventDefault();
         const { errors, ...newUser } = this.state;
         this.props.createUser(newUser, this.props.history);
     };
     //==========================================================================
-    onChange = (e) => this.setState({ [e.target.name]: e.target.value });
+    onChange = e => this.setState({ [e.target.name]: e.target.value });
     //==========================================================================
     render() {
         const {
@@ -224,7 +228,7 @@ SignUp.propTypes = {
     errors: PropTypes.object.isRequired,
 };
 //==========================================================================
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     auth: state.auth,
     errors: state.errors,
 });
