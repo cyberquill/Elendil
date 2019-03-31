@@ -9,34 +9,40 @@ class LectureCard extends Component {
     constructor(props) {
         super(props);
 
-        this.lectureHandler = this.lecturesHandler.bind(this);
+        this.lectureHandler = this.lectureHandler.bind(this);
     }
     //==========================================================================
     componentDidUpdate(prevProps) {
         if (!isEmpty(this.props.errors) && this.props.errors !== 'Unauthorized')
             this.setState({ errors: this.props.errors });
 
-        if (!isEmpty(this.props.activeLecture))
-            this.props.history.push('/dashboard/course/lectures');
+        /* if (!isEmpty(this.props.))
+            this.props.history.push('/dashboard/course/lectures'); */
     }
     //==========================================================================
     lectureHandler = e => {
         e.preventDefault();
-        this.props.getLectures(this.props.activeCourse._id);
+        this.props.selectLecture(this.props.index);
     };
     //==========================================================================
     render() {
-        const { name, sno, link, date, description, thumb } = this.props;
+        const { name, linkID, date } = this.props;
         return (
-            <div className="lcard">
-                <img src="" alt="" className="lcard__thumb" />
-            </div>
+            <a href="#" className="lcard" onClick={this.lectureHandler}>
+                <img
+                    src={`https://img.youtube.com/vi/${linkID}/maxresdefault.jpg`}
+                    alt="Lecture Thumb"
+                    className="lcard__thumb"
+                />
+                <div className="lcard__name">{name}</div>
+                <div className="lcard__date">{date}</div>
+            </a>
         );
     }
 }
 //==============================================================================
 const mapStateToProps = state => ({
-    activeLecture: state.lectures.activeLecture,
+    lectures: state.lectures,
     errors: state.errors,
 });
 

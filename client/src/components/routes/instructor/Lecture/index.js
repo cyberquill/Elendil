@@ -21,11 +21,11 @@ class Lecture extends Component {
         if (!isEmpty(this.props.errors) && this.props.errors !== 'Unauthorized')
             this.setState({ errors: this.props.errors });
 
-        if (!isEmpty(this.props.activeLecture))
-            this.props.history.push('/dashboard/course/lectures');
+        if (isEmpty(this.props.lectures.activeLecture))
+            this.props.history.push('/dashboard/course');
 
-        if (!isEmpty(this.props.questions))
-            this.props.history.push('/dashboard/course/lectures');
+        if (isEmpty(this.props.questions))
+            this.props.history.push('/dashboard/course');
     }
     //==========================================================================
     questionsHandler = e => {
@@ -34,16 +34,20 @@ class Lecture extends Component {
     };
     //==========================================================================
     render() {
-        const { name, sno, link, date, description } = this.props.activeLecture;
+        const {
+            name,
+            sno,
+            linkID,
+            date,
+            description,
+        } = this.props.lectures.activeLecture;
 
-        const lectureList = this.props.lectures.map((lecture, index) => (
-            <LectureCard 
+        const lectureList = this.props.lectures.list.map((lecture, index) => (
+            <LectureCard
                 name={lecture.name}
-                sno={lecture.sno}
-                link={lecture.link}
+                index={index}
+                linkID={lecture.linkID}
                 date={lecture.date}
-                thumb={lecture.thumb}
-                description={lecture.description}
                 key={index}
             />
         ));
@@ -53,31 +57,26 @@ class Lecture extends Component {
                 <div className="lecture-left">
                     <div className="lecture-left__ytLink">
                         <iframe
-                            width="840"
-                            height="465"
-                            src={link}
-                            frameborder="0"
+                            className="lecture-left__ytLink-video"
+                            src={`https://www.youtube.com/embed/${linkID}`}
+                            frameBorder="0"
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen
+                            allowFullScreen
                         />
                     </div>
                     <div className="lecture-left__text">
                         <h1 className="lecture-left__text-lect">
                             Lecture {sno}: {name}
                         </h1>
-                        <p className="lecture-left__text-desc">
-                            {description}
-                        </p>
+                        <p className="lecture-left__text-desc">{description}</p>
                     </div>
                 </div>
                 <div className="lecture-right">
-                    <div className="lecture-right__btn">
-                        <a href="#" className="lecture-right__btn-link">
-                            Add Lectures
-                        </a>
-                    </div>
+                    <a href="#" className="lecture-right__btn">
+                        Add Lectures
+                    </a>
                     <div className="lecture-right__lecList">
-                        
+                        {lectureList}
                     </div>
                 </div>
             </div>
@@ -88,7 +87,6 @@ class Lecture extends Component {
 const mapStateToProps = state => ({
     activeCourse: state.courses.activeCourse,
     lectures: state.lectures,
-    activeLecture: state.lectures.activeLecture,
     questions: state.questions.list,
     errors: state.errors,
 });
