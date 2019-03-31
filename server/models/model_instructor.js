@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 // ============================================================================
 const instructorSchema = new Schema({
     uid: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    bio: { type: String, required: true },
+    bio: String,
     twitter: String,
     fb: String,
     insta: String,

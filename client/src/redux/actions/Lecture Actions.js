@@ -52,7 +52,7 @@ export const getLecture = lid => dispatch => {
         );
 };
 
-export const selectCourse = index => dispatch => {
+export const selectLecture = index => dispatch => {
     dispatch({
         type: LECTURE_SELECTED,
         payload: index,

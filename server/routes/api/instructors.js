@@ -13,7 +13,7 @@ router.post('/create',
         if (req.user.role !== 'Instructor')
             res.status(401).send('Unauthorized');
 
-        let inst = req.body;
+        let inst = {};
         inst.uid = req.user.id;
         inst = new Instructor(inst);
         inst = await inst.save();
@@ -21,13 +21,13 @@ router.post('/create',
     }
 );
 // ============================================================================
-//@route    GET: /api/instructors/show/id
+//@route    GET: /api/instructors/id
 //@desc     creates the instructor profile
 //@access   Private
-router.get('/show/:id',
+router.get('/:uid',
     passport.authenticate('jwt', { session: false }), 
     async (req, res) => {
-        const inst = Instructor.findOne({ uid: req.params.id });
+        const inst = await Instructor.findOne({ uid: req.params.uid });
         if(!inst)
             res.status(404).json({});
         else

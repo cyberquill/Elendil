@@ -32,13 +32,27 @@ router.post('/create',
 router.get('/createdby/:uid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-
         const { courses } = await Instructor.findOne({ uid: req.params.uid }).populate('courses');
         if(!courses)
             res.json([]);
 
         res.json(courses);
     },
+);
+// ============================================================================
+//@route    GET: /api/courses/single/cid
+//@desc     returns the course specified
+//@access   Private
+router.get('/single/:cid',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        const course = await Course.findById(req.params.cid);
+
+        if (course)
+            res.json(course);
+        else
+            res.status(404).json({ course: 'Course not found!' });
+    }
 );
 // ============================================================================
 module.exports = router;

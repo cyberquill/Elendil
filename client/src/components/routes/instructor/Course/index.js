@@ -26,7 +26,7 @@ class Course extends Component {
             this.props.history.push('/dashboard/course/lectures');
 
         if (!isEmpty(this.props.questions))
-            this.props.history.push('/dashboard/course/lectures');
+            this.props.history.push('/dashboard/course/questions');
     }
     //==========================================================================
     lecturesHandler = e => {

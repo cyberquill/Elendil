@@ -18,6 +18,7 @@ router.post('/create',
             res.status(400).json({ course: 'Course does not exist!' });
         
         let lecture = req.body;
+        lecture.linkID = lecture.linkID.slice(32);
         lecture.sno = exists.nLectures;
         lecture = new Lecture(lecture);
         lecture = await lecture.save();
@@ -43,6 +44,21 @@ router.get('/of/:cid',
             res.json([]);
 
         res.json(lectures);
+    }
+);
+// ============================================================================
+//@route    GET: /api/lectures/single/lid
+//@desc     fetches the specified lecture
+//@access   Private
+router.get('/single/:lid',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        const lecture = Lecture.findById(req.params.lid);
+
+        if (lecture)
+            res.json(lecture);
+        else
+            res.status(404).json({ lecture: 'Lecture not found!' });
     }
 );
 // ============================================================================
