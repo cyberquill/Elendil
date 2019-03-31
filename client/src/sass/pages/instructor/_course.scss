@@ -1,0 +1,103 @@
+
+.course {
+    width: 100%;
+    color: black;
+
+    &__cover {
+        width: 100%;
+        height: 50vh;
+        object-fit: cover;
+        object-position: center;
+        overflow: hidden;
+    }
+
+    &__logo {
+        position: absolute;
+        height: 300px;
+        width: 300px;
+        border: 20px solid white;
+        object-fit: cover;
+        object-position: center;
+        right: 5%;
+        top:350px;
+        transform: translateY(-50%);
+    }
+
+    &__title {
+        color: white;
+        position: absolute;
+        top: 250px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 5rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        padding-left: 20px;
+    }
+
+    &__about {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        padding: 20px;
+        font-size: 20px;
+        text-align: justify;
+        width: 45%;
+    }
+
+    &__info {
+        font-family: lato, serif;
+        font-size: 20px;
+
+        &-group {
+            position: absolute;
+            top: 375px;
+            right: 400px;
+        }
+    }
+
+    &__btn {
+        background: white;
+        margin: 10px;
+        padding: 12px 20px;
+        font-size: 28px;
+        border-radius: 10px;
+        font-family: "Roboto Condensed", sans-serif ;
+        letter-spacing: 1px;
+
+        color: #7066CF;
+        border: 4px solid #48e489;
+        transition: 0.4s all;
+
+        &:hover {
+            border: 4px solid #7066CF;
+            background: #7066CF;
+            color: #00ff0d;
+        }
+
+        &-group {
+            position: absolute;
+            right: 4.3%;
+            top: 520px;
+        }
+    }
+
+    &__suggestion {
+        font-size: 20px;
+        border: 0.5px solid #474646;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin: 10px 20px;
+    }
+}
+
+.suggestion {
+    &__heading {
+        font-size: 3rem;
+        color: #7066CF;
+        margin: 10px 20px;
+    }
+    
+    &-list {
+        z-index: -1;
+        margin-top: 70px; 
+        margin-bottom: 100px; 
+    }
+}

@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import isEmpty from '../../../../validation/isEmpty';
 import { getCourses } from '../../../../redux/actions/Course Actions';
 import DashCard from './DashCard';
 
 class dashboard extends Component {
-    constructor(props) {
-        super(props);
-    }
+    
     //==========================================================================
     componentWillMount() {
+        if(isEmpty(this.props.user))
+            this.props.history.push('/login');
+            
         this.props.getCourses(this.props.user.id);
     }
     //==========================================================================
@@ -18,7 +21,8 @@ class dashboard extends Component {
                 image={course.logo}
                 title={course.title}
                 about={course.about}
-                link={`/course/${course.id}`}
+                link={`dashboard/course/`}
+                index={index}
                 key={index}
             />
         ));
@@ -32,12 +36,12 @@ class dashboard extends Component {
 }
 //==========================================================================
 const mapStateToProps = state => ({
-    user: state.auth.user,
     courses: state.courses.list,
+    user: state.auth.user,
     errors: state.errors,
 });
 
 export default connect(
     mapStateToProps,
     { getCourses },
-)(dashboard);
+)(withRouter(dashboard));

@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css?family=Lato:400,900');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,900|Roboto+Condensed');
 
 @import "abstracts/functions";
 @import "abstracts/mixins";
@@ -18,4 +18,5 @@
 
 @import "pages/home";
 @import "pages/SignUp&Login";
-@import "pages/instructor/dashboard"
+@import "pages/instructor/dashboard";
+@import "pages/instructor/course";

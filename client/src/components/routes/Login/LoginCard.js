@@ -24,7 +24,7 @@ class Login extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (!isEmpty(this.props.errors))
+        if (!isEmpty(this.props.errors) && this.props.errors !== 'Unauthorized')
             this.setState({ errors: this.props.errors });
 
         if (!isEmpty(this.props.instructor))

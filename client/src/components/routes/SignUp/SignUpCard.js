@@ -31,7 +31,7 @@ class SignUp extends Component {
         }
     }
     //==========================================================================
-    onSubmit = async (e) => {
+    onSubmit = (e) => {
         e.preventDefault();
         const { errors, ...newUser } = this.state;
         this.props.createUser(newUser, this.props.history);
@@ -45,8 +45,6 @@ class SignUp extends Component {
             email,
             password,
             password2,
-            role,
-            gender,
             profilePic,
             errors,
         } = this.state;

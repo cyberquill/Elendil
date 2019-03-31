@@ -19,7 +19,7 @@ export default function (state = initialState, action) {
         case QUESTION_SELECTED:
             return {
                 ...state,
-                activeQuestion: list[action.payload],
+                activeQuestion: state.list[action.payload],
             };
 
         default:

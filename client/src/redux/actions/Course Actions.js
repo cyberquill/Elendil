@@ -53,6 +53,7 @@ export const getCourse = cid => dispatch => {
 };
 
 export const selectCourse = index => dispatch => {
+    console.log(index);
     dispatch({
         type: COURSE_SELECTED,
         payload: index,

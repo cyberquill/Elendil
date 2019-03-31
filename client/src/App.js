@@ -11,6 +11,8 @@ import store from './redux/store';
 import Footer from './components/layout/Footer';
 
 import Dashboard from './components/routes/instructor/Dashboard';
+import Course from './components/routes/instructor/Course';
+import Lecture from './components/routes/instructor/Lecture';
 
 import Home from './components/routes/Home';
 import SignUp from './components/routes/SignUp';
@@ -36,6 +38,8 @@ class App extends Component {
                         <Route exact path="/signup" component={SignUp} />
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/dashboard" component={Dashboard} />
+                        <Route exact path="/dashboard/course" component={Course} />
+                        <Route exact path="/dashboard/course/lecture" component={Lecture} />
                         <Route component={NotFound} />
                     </Switch>
                 </Router>

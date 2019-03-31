@@ -15,6 +15,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 list: action.payload,
+                activeLecture: action.payload[0],
             };
 
         case LECTURE_FETCHED:
