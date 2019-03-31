@@ -26,7 +26,7 @@ export default function(state = initialState, action) {
         case LECTURE_SELECTED:
             return {
                 ...state,
-                activeLecture: list[action.payload],
+                activeLecture: state.list[action.payload],
             };
 
         default:

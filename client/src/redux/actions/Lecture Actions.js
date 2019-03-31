@@ -37,7 +37,7 @@ export const getLectures = cid => dispatch => {
 
 export const getLecture = lid => dispatch => {
     axios
-        .get(`/api/courses/${lid}`)
+        .get(`/api/courses/single/${lid}`)
         .then(res =>
             dispatch({
                 type: LECTURE_FETCHED,

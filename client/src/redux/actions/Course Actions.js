@@ -37,7 +37,7 @@ export const getCourses = uid => dispatch => {
 
 export const getCourse = cid => dispatch => {
     axios
-        .get(`/api/courses/${cid}`)
+        .get(`/api/courses/single/${cid}`)
         .then(res =>
             dispatch({
                 type: COURSE_FETCHED,

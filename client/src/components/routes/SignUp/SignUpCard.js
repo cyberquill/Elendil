@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { createUser } from '../../../redux/actions/Auth Actions';
 import FormGroup from '../../layout/formGroup';
-import axios from 'axios';
 
 class SignUp extends Component {
     constructor() {

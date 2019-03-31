@@ -5,6 +5,8 @@ import FormGroup from '../../layout/formGroup';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser } from '../../../redux/actions/Auth Actions';
+import { getCreateInstructor } from '../../../redux/actions/Instructor Actions';
+import isEmpty from '../../../validation/isEmpty';
 
 class Login extends Component {
     constructor() {
@@ -21,19 +23,24 @@ class Login extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    componentWillReceiveProps(newProps) {
-        if (newProps.errors) this.setState({ errors: newProps.errors });
+    componentDidUpdate(prevProps) {
+        if (!isEmpty(this.props.errors))
+            this.setState({ errors: this.props.errors });
 
-        if (newProps.auth.isAuthenticated) this.props.history.push('/');
+        if (!isEmpty(this.props.instructor))
+            this.props.history.push('/dashboard');
+
+        if (!isEmpty(this.props.auth.user) && isEmpty(this.props.instructor))
+            this.props.getCreateInstructor(this.props.auth.user.id);
     }
 
-    onSubmit = (e) => {
+    onSubmit = e => {
         e.preventDefault();
         const { errors, ...user } = this.state;
         this.props.loginUser(user);
     };
 
-    onChange = (e) => this.setState({ [e.target.name]: e.target.value });
+    onChange = e => this.setState({ [e.target.name]: e.target.value });
 
     render() {
         const { email, password, errors } = this.state;
@@ -119,12 +126,13 @@ Login.propTypes = {
     errors: PropTypes.object.isRequired,
 };
 
-const mapStatesToProps = (state) => ({
+const mapStatesToProps = state => ({
     auth: state.auth,
+    instructor: state.instructor,
     errors: state.errors,
 });
 
 export default connect(
     mapStatesToProps,
-    { loginUser },
+    { loginUser, getCreateInstructor },
 )(withRouter(Login));
