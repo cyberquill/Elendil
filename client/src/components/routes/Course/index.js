@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import isEmpty from '../../../../validation/isEmpty';
+import isEmpty from '../../../validation/isEmpty';
 
 class Course extends Component {
     //==========================================================================

@@ -25,6 +25,7 @@ export const getAnswers = qid => dispatch => {
         .get(`/api/answers/of/${qid}`)
         .then(res =>
             dispatch({
+                qid,
                 type: ANSWERS_FETCHED,
                 payload: res.data,
             })

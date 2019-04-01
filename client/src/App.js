@@ -10,12 +10,12 @@ import store from './redux/store';
 //-----------------------------------------------------------
 import Footer from './components/layout/Footer';
 
-import Dashboard from './components/routes/instructor/Dashboard';
-import Course from './components/routes/instructor/Course';
-import CourseCreate from './components/routes/instructor/Course/CourseCreate';
-import Lecture from './components/routes/instructor/Lecture';
-import LectureCreate from './components/routes/instructor/Lecture/LectureCreate';
-import QA from './components/routes/instructor/QA';
+import Dashboard from './components/routes/Dashboard';
+import Course from './components/routes/Course';
+import CourseCreate from './components/routes/Course/CourseCreate';
+import Lecture from './components/routes/Lecture';
+import LectureCreate from './components/routes/Lecture/LectureCreate';
+import QA from './components/routes/QA';
 
 import Home from './components/routes/Home';
 import SignUp from './components/routes/SignUp';
@@ -27,7 +27,8 @@ if (localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
     const decoded = jwt_decode(localStorage.jwtToken);
     store.dispatch(setCurrentUser(decoded));
-    store.dispatch(getCreateInstructor(decoded.id));
+    if(decoded.role === 'Instructor')
+        store.dispatch(getCreateInstructor(decoded.id));
 }
 //===================================================================================
 

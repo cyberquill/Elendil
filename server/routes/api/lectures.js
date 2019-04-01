@@ -41,7 +41,7 @@ router.get('/of/:cid',
         const {lectures} = await Course.findById(req.params.cid).populate('lectures');
 
         if(!lectures)
-            res.json([]);
+            res.status(404).json([]);
 
         res.json(lectures);
     }

@@ -34,7 +34,8 @@ router.post('/create',
 router.get('/of/:qid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        const { answers } = await Question.findById(req.params.qid).populate('answers',null,null,{sort: {'sno': 1}});
+        const { answers } = await Question.findById(req.params.qid)
+            .populate('answers',null,null,{sort: {'sno': 1}});
 
         if(!answers)
             res.status(404).json([]);

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import isEmpty from '../../../../validation/isEmpty';
-import { selectLecture } from '../../../../redux/actions/Lecture Actions';
+import isEmpty from '../../../validation/isEmpty';
+import { selectLecture } from '../../../redux/actions/Lecture Actions';
 
 class LectureCard extends Component {
     //==========================================================================

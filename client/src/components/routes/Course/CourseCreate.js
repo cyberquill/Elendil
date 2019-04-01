@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import FormGroup from '../../../layout/formGroup';
-import isEmpty from '../../../../validation/isEmpty';
-import { createLecture } from '../../../../redux/actions/Lecture Actions';
+import FormGroup from '../../layout/formGroup';
+import isEmpty from '../../../validation/isEmpty';
+import { createCourse } from '../../../redux/actions/Course Actions';
 
-class LectureCreate extends Component {
+class CourseCreate extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            name: '',
-            description: '',
-            linkID: '',
-            cid: this.props.activeCourse._id,
+            title: '',
+            price: '',
+            about: '',
+            logo: '',
+            cover: '',
             errors: {},
         };
 
@@ -32,51 +33,73 @@ class LectureCreate extends Component {
     //==========================================================================
     onSubmit = e => {
         e.preventDefault();
-        const { errors, ...newLecture } = this.state;
-        this.props.createLecture(newLecture, this.props.history);
+        const { errors, ...newCourse } = this.state;
+        this.props.createCourse(newCourse, this.props.history);
     };
     //==========================================================================
     onChange = e => this.setState({ [e.target.name]: e.target.value });
     //==========================================================================
     render() {
-        const { name, description, linkID, errors } = this.state;
+        const { title, price, about, logo, cover, errors } = this.state;
         return (
             <div className="data">
-                <div className="login__card">
+                <div className="data__card">
                     <form
                         noValidate
                         className="data__card__form"
                         onSubmit={this.onSubmit}>
                         <FormGroup
-                            name="name"
+                            name="title"
                             type="text"
                             thumb="fas fa-user-alt"
-                            placeholder="name"
-                            value={name}
+                            placeholder="Title"
+                            value={title}
                             onChange={this.onChange}
-                            error={errors.name}
+                            error={errors.title}
                             others="mt-5"
                         />
 
                         <FormGroup
-                            name="description"
+                            name="price"
+                            type="text"
+                            thumb="fas fa-user-alt"
+                            placeholder="Price"
+                            value={price}
+                            onChange={this.onChange}
+                            error={errors.price}
+                            others="mt-5"
+                        />
+
+                        <FormGroup
+                            name="about"
                             type="text"
                             thumb="fas fa-envelope"
-                            placeholder="description"
-                            value={description}
+                            placeholder="About"
+                            value={about}
                             onChange={this.onChange}
-                            error={errors.description}
+                            error={errors.about}
                             others="mt-5"
                         />
 
                         <FormGroup
-                            name="linkID"
+                            name="logo"
                             type="url"
                             thumb="fas fa-lock"
-                            placeholder="Video Link"
-                            value={linkID}
+                            placeholder="Logo Image"
+                            value={logo}
                             onChange={this.onChange}
-                            error={errors.linkID}
+                            error={errors.logo}
+                            others="mt-5"
+                        />
+
+                        <FormGroup
+                            name="cover"
+                            type="url"
+                            thumb="fas fa-unlock-alt"
+                            placeholder="Cover Image"
+                            value={cover}
+                            onChange={this.onChange}
+                            error={errors.cover}
                             others="mt-5"
                         />
 
@@ -95,11 +118,11 @@ class LectureCreate extends Component {
 }
 //==============================================================================
 const mapStateToProps = state => ({
-    activeCourse: state.courses.activeCourse,
+    user: state.auth.user,
     errors: state.errors,
 });
 
 export default connect(
     mapStateToProps,
-    { createLecture },
-)(withRouter(LectureCreate));
+    { createCourse },
+)(withRouter(CourseCreate));

@@ -7,16 +7,32 @@
     display: inline-block;
     position: relative;
     
-    
-    .card-img {
+    &-img {
         height: 70%;
         object-fit: cover;
         object-position: center;
     }
+
+    &Group {
+        text-align: center;
+    }
+}
+
+
+.cardsheading {
+    display: block;
+    font-size: 35px;
+    color: white;
+    text-align: center;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 10px;
+    margin: 50px;
 }
 
 .dashboard {
     background: rgb(71, 71, 71);
+    
     &__btn {
         margin: 50px 0;
         display: flex;

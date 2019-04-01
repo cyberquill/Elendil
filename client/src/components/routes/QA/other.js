@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import isEmpty from '../../../../validation/isEmpty';
+import isEmpty from '../../../validation/isEmpty';
 import {
-    selectQuestion,
-    createQuestion,
     getQuestions,
-} from '../../../../redux/actions/Question Actions';
-import {
-    getAnswers,
-    createAnswer,
-} from '../../../../redux/actions/Answer Actions';
+    createQuestion,
+} from '../../../redux/actions/Question Actions';
+import { createAnswer } from '../../../redux/actions/Answer Actions';
+import qaCard from './qaCard';
 
 class QA extends Component {
     //==========================================================================
@@ -30,14 +27,7 @@ class QA extends Component {
     }
     //==========================================================================
     componentDidMount() {
-        if (isEmpty(this.props.activeCourse))
-            this.props.history.push('/dashboard');
-
         this.props.getQuestions(this.props.activeCourse._id);
-
-        this.props.questions.list.forEach(question => {
-            this.props.getAnswers(question._id);
-        });
     }
     //==========================================================================
     componentDidUpdate(prevProps) {
@@ -48,8 +38,6 @@ class QA extends Component {
         )
             this.setState({ errors: this.props.errors });
     }
-    //==========================================================================
-    questionHandler = index => this.props.selectQuestion(index);
     //==========================================================================
     onQuestionSubmit = e => {
         let newQuestion = {};
@@ -62,70 +50,17 @@ class QA extends Component {
         let newAnswer = {};
         newAnswer.text = this.state.answer;
         newAnswer.qid = this.props.questions.activeQuestion._id;
-        console.log(newAnswer);
         this.props.createAnswer(newAnswer, this.props.history);
     };
     //==========================================================================
     onChange = e => this.setState({ [e.target.name]: e.target.value });
     //==========================================================================
     render() {
-        const qaCard = this.props.questions.list.map((q, index) => {
-            let answers = [];
-            this.props.answers.forEach(a => {
-                if (a.qid === q._id) answers = a.answers;
-            });
-
-            const addAnswer = (
-                <div className="card-body qa__answers" key={index}>
-                    <button
-                        type="button"
-                        class="btn btn-success"
-                        data-toggle="modal"
-                        data-target="#exampleModal2">
-                        Add Answer
-                    </button>
-                </div>
-            );
-
-            const formatted = answers.map((a, index) => (
-                <div className="card-body qa__answers" key={index}>
-                    {a.text}
-                </div>
-            ));
-
-            return (
-                <div className="card qa__question" key={index}>
-                    <div
-                        className="card-header qa__question--text"
-                        id="headingOne">
-                        <h5 className="mb-0">
-                            <button
-                                className="btn btn-lg btn-primary btn-block"
-                                type="button"
-                                data-toggle="collapse"
-                                data-target={`#collapse${q.sno}`}
-                                aria-expanded="true"
-                                aria-controls={`collapse${q.sno}`}
-                                onClick={this.questionHandler.bind(
-                                    this,
-                                    index,
-                                )}>
-                                {q.text}
-                            </button>
-                        </h5>
-                    </div>
-
-                    <div
-                        id={`collapse${q.sno}`}
-                        className="collapse"
-                        aria-labelledby="headingOne"
-                        data-parent="#accordionExample">
-                        {addAnswer}
-                        {formatted}
-                    </div>
-                </div>
-            );
-        });
+        const qaCardStack = this.props.questions.list.map((q, index) => {
+            <qaCard 
+            
+            />
+        };
 
         return (
             <React.Fragment>
@@ -134,14 +69,26 @@ class QA extends Component {
                     <div className="qa__button">
                         <button
                             type="button"
-                            class="btn btn-primary btn-lg mb-5"
+                            class="btn btn-outline-primary btn-lg mb-5"
                             data-toggle="modal"
                             data-target="#exampleModal">
                             Ask a Question
                         </button>
                     </div>
-                    {qaCard}
+                    {qaCardStack}
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <div
                     class="modal fade text-dark"
@@ -260,5 +207,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { selectQuestion, createQuestion, getQuestions, getAnswers, createAnswer },
+    { getQuestions, createQuestion, createAnswer },
 )(withRouter(QA));

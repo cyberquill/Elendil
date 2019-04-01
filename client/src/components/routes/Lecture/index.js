@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import isEmpty from '../../../../validation/isEmpty';
-import { getLectures } from '../../../../redux/actions/Lecture Actions';
+import isEmpty from '../../../validation/isEmpty';
+import { getLectures } from '../../../redux/actions/Lecture Actions';
 import LectureCard from './LectureCard';
 
 class Lecture extends Component {
@@ -37,17 +37,23 @@ class Lecture extends Component {
     };
     //==========================================================================
     render() {
+        let createLectureBtn = null;
+        if (this.props.user.role === 'Instructor')
+            createLectureBtn = (
+                <Link
+                    to="/dashboard/course/lectures/create"
+                    className="lecture-right__btn">
+                    Add Lectures
+                </Link>
+            );
+
         if (isEmpty(this.props.lectures.activeLecture)) {
             return (
                 <React.Fragment>
                     <div className="lecture">
                         <h1 className="pt-1 mb-3">No Lectures yet...</h1>
                     </div>
-                    <Link
-                        to="/dashboard/course/lectures/create"
-                        className="lecture-right__btn">
-                        Add Lectures
-                    </Link>
+                    {createLectureBtn}
                 </React.Fragment>
             );
         } else {
@@ -91,11 +97,7 @@ class Lecture extends Component {
                         </div>
                     </div>
                     <div className="lecture-right">
-                        <Link
-                            to="/dashboard/course/lectures/create"
-                            className="lecture-right__btn">
-                            Add Lectures
-                        </Link>
+                        {createLectureBtn}
                         <div className="lecture-right__lecList">
                             {lectureList}
                         </div>
@@ -110,6 +112,7 @@ const mapStateToProps = state => ({
     activeCourse: state.courses.activeCourse,
     lectures: state.lectures,
     questions: state.questions.list,
+    user: state.auth.user,
     errors: state.errors,
 });
 

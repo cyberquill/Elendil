@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { selectCourse } from '../../../../redux/actions/Course Actions';
+import { selectCourse } from '../../../redux/actions/Course Actions';
 
 class DashCard extends Component {
     constructor(props) {
@@ -12,13 +12,8 @@ class DashCard extends Component {
     //==========================================================================
     clickHandler = e => {
         e.preventDefault();
-        this.props.selectCourse(this.props.index, this.props.history);
+        this.props.selectCourse(this.props.index, this.props.area, this.props.history);
     };
-    //==========================================================================
-    /* componentDidUpdate(prevProps) {
-        if (this.props.activeCourse.title === this.props.title)
-            this.props.history.push(this.props.link);
-    } */
     //==========================================================================
     render() {
         const { image, title, about } = this.props;

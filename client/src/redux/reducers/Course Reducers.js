@@ -2,11 +2,13 @@ import {
     COURSES_FETCHED,
     COURSE_FETCHED,
     COURSE_SELECTED,
+    COURSES_FETCHED_ALL,
 } from '../actions/types';
 
 const initialState = {
     activeCourse: {},
     list: [],
+    all: [],
 };
 
 export default function(state = initialState, action) {
@@ -17,6 +19,12 @@ export default function(state = initialState, action) {
                 list: action.payload,
             };
 
+        case COURSES_FETCHED_ALL:
+            return {
+                ...state,
+                all: action.payload,
+            };
+
         case COURSE_FETCHED:
             return {
                 ...state,
@@ -24,10 +32,12 @@ export default function(state = initialState, action) {
             };
 
         case COURSE_SELECTED:
-            return {
-                ...state,
-                activeCourse: state.list[action.payload],
-            };
+            if(action.area == "list")
+                state.activeCourse = state.list[action.payload];
+            else
+                state.activeCourse = state.all[action.payload];
+
+            return state;
 
         default:
             return state;

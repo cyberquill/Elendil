@@ -39,8 +39,14 @@ class Login extends Component {
         if (!isEmpty(this.props.instructor))
             this.props.history.push('/dashboard');
 
-        if (!isEmpty(this.props.auth.user) && isEmpty(this.props.instructor))
-            this.props.getCreateInstructor(this.props.auth.user.id);
+        if (!isEmpty(this.props.auth.user))
+            if (
+                this.props.auth.user.role == 'Instructor' &&
+                isEmpty(this.props.instructor)
+            )
+                this.props.getCreateInstructor(this.props.auth.user.id);
+            else
+                this.props.history.push('/dashboard');
     }
     //==========================================================================
     onSubmit = e => {

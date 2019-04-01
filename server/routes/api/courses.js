@@ -8,7 +8,8 @@ const validateCreateCourseInput = require('../../validation/createCourse');
 //@route    POST: /api/courses/create
 //@desc     creates the course
 //@access   Private && Instructor
-router.post('/create',
+router.post(
+    '/create',
     passport.authenticate('jwt', { session: false }),
     validateCreateCourseInput,
     async (req, res) => {
@@ -29,29 +30,40 @@ router.post('/create',
 //@route    GET: /api/courses/createdby/uid
 //@desc     returns the courses created by the instructor
 //@access   Private
-router.get('/createdby/:uid',
+router.get(
+    '/createdby/:uid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        const { courses } = await Instructor.findOne({ uid: req.params.uid }).populate('courses');
-        if(!courses)
-            res.json([]);
+        const { courses } = await Instructor.findOne({uid: req.params.uid})
+            .populate('courses');
 
-        res.json(courses);
+        if (!courses) res.status(404).json([]);
+        else res.json(courses);
     },
 );
 // ============================================================================
 //@route    GET: /api/courses/single/cid
 //@desc     returns the course specified
 //@access   Private
-router.get('/single/:cid',
+router.get(
+    '/single/:cid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
         const course = await Course.findById(req.params.cid);
 
-        if (course)
-            res.json(course);
-        else
-            res.status(404).json({ course: 'Course not found!' });
+        if (course) res.json(course);
+        else res.status(404).json({ course: 'Course not found!' });
+    },
+);
+// ============================================================================
+//@route    GET: /api/courses/all
+//@desc     returns the list of all courses, sorted by the date created
+//@access   Private
+router.get('/all',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        const courses = await Course.find({},null,{sort: {date: 'desc'}});
+        res.json(courses);
     }
 );
 // ============================================================================

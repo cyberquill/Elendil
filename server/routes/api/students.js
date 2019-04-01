@@ -40,7 +40,7 @@ router.get('/enrolledin/:cid',
         const {studentIDs} = await Course.findOne({id: req.params.cid}).populate('students', 'uid');
 
         if(!studentIDs)
-            res.json([]);
+            res.status(404).json([]);
         
         let students = [];
         studentIDs.forEach(async ID => students.push(await User.findById(ID)) );
