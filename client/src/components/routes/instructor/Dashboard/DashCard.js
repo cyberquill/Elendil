@@ -12,18 +12,18 @@ class DashCard extends Component {
     //==========================================================================
     clickHandler = e => {
         e.preventDefault();
-        this.props.selectCourse(this.props.index);
+        this.props.selectCourse(this.props.index, this.props.history);
     };
     //==========================================================================
-    componentDidUpdate(prevProps) {
+    /* componentDidUpdate(prevProps) {
         if (this.props.activeCourse.title === this.props.title)
             this.props.history.push(this.props.link);
-    }
+    } */
     //==========================================================================
     render() {
-        const { image, title, about, link } = this.props;
+        const { image, title, about } = this.props;
         return (
-            <Link to={link} onClick={this.clickHandler}>
+            <Link to='/' onClick={this.clickHandler}>
                 <div className="card">
                     <img src={image} className="card-img" alt="" />
                     <div className="title">

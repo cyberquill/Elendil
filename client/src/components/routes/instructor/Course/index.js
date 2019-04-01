@@ -2,28 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import isEmpty from '../../../../validation/isEmpty';
-import { getLectures } from '../../../../redux/actions/Lecture Actions';
-import { getQuestions } from '../../../../redux/actions/Question Actions';
-import { getAnswers } from '../../../../redux/actions/Answer Actions';
 
 class Course extends Component {
     //==========================================================================
-    componentWillMount() {
-        if (isEmpty(this.props.activeCourse)) this.props.history.push('/login');
-
-        this.props.getLectures(this.props.activeCourse._id);
-        this.props.getQuestions(this.props.activeCourse._id);
+    componentDidMount() {
+        if (isEmpty(this.props.activeCourse))
+            this.props.history.push('/dashboard');
     }
     //==========================================================================
     componentDidUpdate(prevProps) {
-        if (!isEmpty(this.props.errors) && this.props.errors !== 'Unauthorized')
+        if (
+            !isEmpty(this.props.errors) &&
+            this.props.errors !== prevProps.errors &&
+            this.props.errors !== 'Unauthorized'
+        )
             this.setState({ errors: this.props.errors });
-
-        /* if (!isEmpty(this.props.questions)) {
-            this.props.questions.forEach(question => {
-                this.props.getAnswers(question._id);
-            });
-        } */
     }
     //==========================================================================
     render() {
@@ -56,7 +49,16 @@ class Course extends Component {
                 <img className="course__logo" src={logo} alt="Course Logo" />
 
                 <div className="course__title">{title}</div>
-                <div className="course__about">{about}</div>
+                <div className="course__about">
+                    {about}
+                    &nbsp;Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Unde natus earum rem distinctio ullam quasi, exercitationem
+                    cum voluptatum cumque ratione eos ex officiis laboriosam
+                    nulla maxime aut aliquid consequatur asperiores, ab numquam
+                    dicta perspiciatis, odio expedita molestias? Ipsa laudantium
+                    dolorum rem, voluptas maxime autem sed consequuntur, illo,
+                    animi odio adipisci.
+                </div>
 
                 <div className="course__info-group">
                     {/* <div className="course__info">
@@ -99,12 +101,10 @@ class Course extends Component {
 //==============================================================================
 const mapStateToProps = state => ({
     activeCourse: state.courses.activeCourse,
-    activeLecture: state.lectures.activeLecture,
-    questions: state.questions.list,
     errors: state.errors,
 });
 
 export default connect(
     mapStateToProps,
-    { getLectures, getQuestions, getAnswers },
+    null,
 )(withRouter(Course));

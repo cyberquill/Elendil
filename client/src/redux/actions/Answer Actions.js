@@ -4,7 +4,14 @@ import { ANSWERS_FETCHED, GET_ERRORS } from './types';
 export const createAnswer = (newAnswer, history) => dispatch => {
     axios
         .post('/api/answers/create', newAnswer)
-        // .then(res => history.push('/dashboard/course'))
+        .then(res => axios
+            .get(`/api/answers/of/${newAnswer.qid}`)
+            .then(res =>
+                dispatch({
+                    type: ANSWERS_FETCHED,
+                    payload: res.data,
+                })
+            ))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,

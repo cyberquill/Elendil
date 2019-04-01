@@ -19,17 +19,21 @@
                 height: 100%;
             }
         }
+        &__text {
+            padding-bottom: 10px;
 
-        &__text-lect {
-            margin-top: 30px;
-            border-radius: 3px;
-        }
+            &-lect {
+                margin-top: 30px;
+                margin-bottom: 10px;
+                border-radius: 3px;
+            }
 
-        &__text-desc {
-            padding: 20px 0;
-            font-family: "Open Sans";
-            font-size: 15px;
-            color: rgb(146, 146, 146);
+            &-desc {
+                padding: 20px -10px;
+                font-family: "Open Sans";
+                font-size: 20px;
+                color: rgb(204, 203, 203);
+            }
         }
     }
 

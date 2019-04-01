@@ -26,6 +26,11 @@ class SignUp extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     //==========================================================================
+    /* componentDidMount() {
+        if(!isEmpty(this.props.auth.user))
+            this.props.history.push('/dashboard');
+    } */
+    //==========================================================================
     componentDidUpdate(prevProps) {
         if (
             !isEmpty(this.props.errors) &&

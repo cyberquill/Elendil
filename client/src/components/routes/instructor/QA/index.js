@@ -5,6 +5,7 @@ import isEmpty from '../../../../validation/isEmpty';
 import {
     selectQuestion,
     createQuestion,
+    getQuestions,
 } from '../../../../redux/actions/Question Actions';
 import {
     getAnswers,
@@ -28,10 +29,12 @@ class QA extends Component {
         this.onChange = this.onChange.bind(this);
     }
     //==========================================================================
-    componentWillMount() {
-        if (isEmpty(this.props.activeCourse)) this.props.history.push('/login');
-    }
     componentDidMount() {
+        if (isEmpty(this.props.activeCourse))
+            this.props.history.push('/dashboard');
+
+        this.props.getQuestions(this.props.activeCourse._id);
+
         this.props.questions.list.forEach(question => {
             this.props.getAnswers(question._id);
         });
@@ -44,9 +47,6 @@ class QA extends Component {
             this.props.errors !== 'Unauthorized'
         )
             this.setState({ errors: this.props.errors });
-
-        if (isEmpty(this.props.questions.list))
-            this.props.history.push('/dashboard/course');
     }
     //==========================================================================
     questionHandler = index => this.props.selectQuestion(index);
@@ -59,7 +59,6 @@ class QA extends Component {
     };
     //==========================================================================
     onAnswerSubmit = e => {
-        // e.preventDefault();
         let newAnswer = {};
         newAnswer.text = this.state.answer;
         newAnswer.qid = this.props.questions.activeQuestion._id;
@@ -80,7 +79,7 @@ class QA extends Component {
                 <div className="card-body qa__answers" key={index}>
                     <button
                         type="button"
-                        class="btn btn-primary"
+                        class="btn btn-success"
                         data-toggle="modal"
                         data-target="#exampleModal2">
                         Add Answer
@@ -132,6 +131,15 @@ class QA extends Component {
             <React.Fragment>
                 <div className="accordion qa" id="accordionExample">
                     <div className="qa__title">Questions & Answers</div>
+                    <div className="qa__button">
+                        <button
+                            type="button"
+                            class="btn btn-primary btn-lg mb-5"
+                            data-toggle="modal"
+                            data-target="#exampleModal">
+                            Ask a Question
+                        </button>
+                    </div>
                     {qaCard}
                 </div>
 
@@ -156,7 +164,7 @@ class QA extends Component {
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form noValidate onSubmit={this.onAnswerSubmit}>
+                            <form noValidate>
                                 <div class="modal-body">
                                     <input
                                         type="text"
@@ -178,20 +186,14 @@ class QA extends Component {
                                         type="submit"
                                         class="btn btn-primary"
                                         value="Submit"
+                                        data-dismiss="modal"
+                                        onClick={this.onAnswerSubmit}
                                     />
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    data-toggle="modal"
-                    data-target="#exampleModal">
-                    Ask a Question
-                </button>
 
                 <div
                     class="modal fade text-dark"
@@ -214,7 +216,7 @@ class QA extends Component {
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form noValidate onSubmit={this.onQuestionSubmit}>
+                            <form noValidate>
                                 <div class="modal-body">
                                     <input
                                         type="text"
@@ -236,6 +238,8 @@ class QA extends Component {
                                         type="submit"
                                         class="btn btn-primary"
                                         value="Submit"
+                                        data-dismiss="modal"
+                                        onClick={this.onQuestionSubmit}
                                     />
                                 </div>
                             </form>
@@ -256,5 +260,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { selectQuestion, createQuestion, getAnswers, createAnswer },
+    { selectQuestion, createQuestion, getQuestions, getAnswers, createAnswer },
 )(withRouter(QA));

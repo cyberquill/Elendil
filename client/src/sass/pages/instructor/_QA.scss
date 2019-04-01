@@ -7,6 +7,13 @@
     justify-content: center;
     width: 100%;
 
+    &__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+
     &__title {
         padding-top: 30px;
         padding-bottom: 40px;
@@ -22,6 +29,7 @@
         display: block;
         width: 65%;
         color: black;
+        height: auto;
         padding: 0;
         margin: 0;
 

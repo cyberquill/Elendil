@@ -8,7 +8,14 @@ import {
 export const createQuestion = (newQuestion, history) => dispatch => {
     axios
         .post('/api/questions/create', newQuestion)
-        // .then(res => history.push('/dashboard/course/questions'))
+        .then(res => axios
+            .get(`/api/questions/askedin/${newQuestion.cid}`)
+            .then(res =>
+                dispatch({
+                    type: QUESTIONS_FETCHED,
+                    payload: res.data,
+                }),
+            ))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,

@@ -52,9 +52,10 @@ export const getCourse = cid => dispatch => {
         );
 };
 
-export const selectCourse = index => dispatch => {
+export const selectCourse = (index, history) => dispatch => {
     dispatch({
         type: COURSE_SELECTED,
         payload: index,
     });
+    history.push('/dashboard/course');
 };

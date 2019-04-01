@@ -22,9 +22,18 @@ class Login extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-
+    //==========================================================================
+    /* componentDidMount() {
+        if (!isEmpty(this.props.auth.user))
+            this.props.history.push('/dashboard');
+    } */
+    //==========================================================================
     componentDidUpdate(prevProps) {
-        if (!isEmpty(this.props.errors) && this.props.errors !== 'Unauthorized')
+        if (
+            !isEmpty(this.props.errors) &&
+            this.props.errors !== prevProps.errors &&
+            this.props.errors !== 'Unauthorized'
+        )
             this.setState({ errors: this.props.errors });
 
         if (!isEmpty(this.props.instructor))
@@ -33,7 +42,7 @@ class Login extends Component {
         if (!isEmpty(this.props.auth.user) && isEmpty(this.props.instructor))
             this.props.getCreateInstructor(this.props.auth.user.id);
     }
-
+    //==========================================================================
     onSubmit = e => {
         e.preventDefault();
         const { errors, ...user } = this.state;
@@ -73,7 +82,7 @@ class Login extends Component {
                         error={errors.password}
                         others="mt-4 mb-5"
                     />
-                    <div className="form__radio-group">
+                    <div className="form__radio-group2">
                         <input
                             type="radio"
                             className="form__radio-input"
@@ -88,7 +97,7 @@ class Login extends Component {
                         </label>
                     </div>
 
-                    <div className="form__radio-group">
+                    <div className="form__radio-group2">
                         <input
                             type="radio"
                             className="form__radio-input"

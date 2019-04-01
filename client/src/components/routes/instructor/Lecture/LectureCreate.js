@@ -73,7 +73,7 @@ class LectureCreate extends Component {
                             name="linkID"
                             type="url"
                             thumb="fas fa-lock"
-                            placeholder="linkID Image"
+                            placeholder="Video Link"
                             value={linkID}
                             onChange={this.onChange}
                             error={errors.linkID}
