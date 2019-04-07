@@ -1,11 +1,16 @@
 
-.card {
-    width: 20%;
+.dashcard {
+    position: relative;
+    width: 275px;
     height: 400px;
     padding: 10px;
     margin: 20px;
-    display: inline-block;
-    position: relative;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 0px 20px 1px black;
+    }
     
     &-img {
         height: 70%;
@@ -13,8 +18,12 @@
         object-position: center;
     }
 
-    &Group {
+    &-group {
         text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
     }
 }
 

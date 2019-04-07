@@ -40,7 +40,7 @@ router.get('/of/:qid',
         if(!answers)
             res.status(404).json([]);
         
-        /* const result = [];
+        const result = [];
         for(i=0; i<answers.length;i++)
         {
             const user = await User.findById(answers[i].uid).select('name email role profilePic -_id');
@@ -48,8 +48,8 @@ router.get('/of/:qid',
             data.user = { ...user._doc };
             result.push(data);
         }
-        res.json(result); */
-        res.json(answers);
+        res.json(result);
+        // res.json(answers);
     }
 );
 // ============================================================================

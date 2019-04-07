@@ -19,8 +19,8 @@ class DashCard extends Component {
         const { image, title, about } = this.props;
         return (
             <Link to='/' onClick={this.clickHandler}>
-                <div className="card">
-                    <img src={image} className="card-img" alt="" />
+                <div className="card dashcard">
+                    <img src={image} className="dashcard-img" alt="" />
                     <div className="title">
                         <h3>{title}</h3>
                     </div>

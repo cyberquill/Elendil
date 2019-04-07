@@ -157,9 +157,9 @@ class dashboard extends Component {
 
                 {createCourseBtn}
 
-                <div className="cardGroup">{Cards}</div>
+                <div className="dashcard-group">{Cards}</div>
                 <div className="cardsheading">Featured: </div>
-                <div className="cardGroup">{AllCards}</div>
+                <div className="dashcard-group pb-5">{AllCards}</div>
             </section>
         );
     }
