@@ -16,7 +16,6 @@ const formGroup = ({ name, value, thumb, placeholder, type, onChange, error, oth
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
-                    required
                 />
             <span className="rule"></span>
             </div>

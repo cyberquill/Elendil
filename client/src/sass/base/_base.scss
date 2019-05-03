@@ -3,13 +3,11 @@
 *::before {
     margin: 0;
     padding: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;
 }
 
 body {
-    box-sizing: border-box;
     position: relative;
-
     font-family: Lato;
     color: white;
 
