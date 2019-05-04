@@ -11,7 +11,6 @@ module.exports = function(req, res, next) {
     data.password2 = !isEmpty(data.password2) ? data.password2 : '';
     data.gender = !isEmpty(data.gender) ? data.gender : '';
     data.role = !isEmpty(data.role) ? data.role : '';
-    data.profilePic = !isEmpty(data.profilePic) ? data.profilePic : '';
 
     if (!validator.isLength(data.name, { min: 2, max: 30 })) {
         errors.name = 'Name must be between 2 to 30 characters!';
@@ -59,10 +58,6 @@ module.exports = function(req, res, next) {
 
     if (validator.isEmpty(data.role)) {
         errors.role = 'Please select a role!';
-    }
-
-    if (validator.isEmpty(data.profilePic)) {
-        errors.profilePic = 'Please specify a Profile Picture!';
     }
 
     if (!isEmpty(errors)) return res.status(400).json(errors);

@@ -16,7 +16,7 @@ const courseSchema = new Schema({
 });
 
 courseSchema.virtual('students', {
-    ref: 'Student',
+    ref: 'Enroll',
     localField: '_id',
     foreignField: 'cid',
 });

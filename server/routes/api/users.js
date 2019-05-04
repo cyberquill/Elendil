@@ -5,7 +5,7 @@ const
     passport = require('passport'),
 
 { secretOrKey } = require('../../config/keys'),
-{ User } = require('../../models');
+{ User, Instructor, Student } = require('../../models');
 //==========================================================================
 const router = express.Router();
 const validateRegisterInput = require('../../validation/signup');
@@ -16,12 +16,12 @@ const validateLoginInput = require('../../validation/login');
 //@access   Public
 
 router.post('/signup', validateRegisterInput, async (req, res) => {
-    let { name, email, password, gender, role, profilePic } = req.body;
+    let { name, email, password, gender, role } = req.body;
     const user = await User.findOne({ email, role });
     if (user)
         return res.status(400).json({ email: 'Email already registered!' });
     
-    let newUser = new User({ name, email, gender, role, profilePic });
+    let newUser = new User({ name, email, gender, role });
 
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(password, salt, async (err, hash) => {
@@ -31,6 +31,17 @@ router.post('/signup', validateRegisterInput, async (req, res) => {
             res.json(newUser);
         });
     });
+
+    if(role === 'Instructor')
+    {
+        let newInst = new Instructor({ uid: newUser.id });
+        newInst = await newInst.save();
+    }
+    else
+    {
+        let newStd = new Student({ uid: newUser.id });
+        newStd = await newStd.save();
+    }
 });
 //==========================================================================
 //@route    POST: api/users/login

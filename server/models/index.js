@@ -25,7 +25,8 @@ process.on('SIGINT', function () {
 module.exports.User = require('./model_user');
 module.exports.Course = require('./model_course');
 module.exports.Lecture = require('./model_lecture');
-module.exports.Student = require('./model_student');
+module.exports.Enroll = require('./model_enroll');
 module.exports.Instructor = require('./model_instructor');
 module.exports.Question = require('./model_question');
 module.exports.Answer = require('./model_answer');
+module.exports.Student = require('./model_student');

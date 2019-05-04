@@ -1,6 +1,6 @@
 const express = require('express'),
     passport = require('passport');
-const { Course, Instructor } = require('../../models');
+const { Course, Instructor, Enroll } = require('../../models');
 // ============================================================================
 const router = express.Router();
 const validateCreateCourseInput = require('../../validation/createCourse');
@@ -34,19 +34,20 @@ router.get(
     '/createdby/:uid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        const { courses } = await Instructor.findOne({uid: req.params.uid})
-            .populate('courses');
+        const { courses } = await Instructor.findOne({
+            uid: req.params.uid,
+        }).populate('courses');
 
         if (!courses) res.status(404).json([]);
         else res.json(courses);
     },
 );
 // ============================================================================
-//@route    GET: /api/courses/single/cid
+//@route    GET: /api/courses/cid
 //@desc     returns the course specified
 //@access   Private
 router.get(
-    '/single/:cid',
+    '/:cid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
         const course = await Course.findById(req.params.cid);
@@ -59,12 +60,13 @@ router.get(
 //@route    GET: /api/courses/all
 //@desc     returns the list of all courses, sorted by the date created
 //@access   Private
-router.get('/all',
+router.get(
+    '/all',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        const courses = await Course.find({},null,{sort: {date: 'desc'}});
+        const courses = await Course.find({}, null, { sort: { date: 'desc' } });
         res.json(courses);
-    }
+    },
 );
 // ============================================================================
 module.exports = router;
