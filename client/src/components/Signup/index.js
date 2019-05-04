@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createUser } from '../../../redux/actions/Auth Actions';
-import FormGroup from '../../layout/formGroup';
+import classnames from 'classnames';
+import isEmpty from '../../validation/isEmpty';
+import { createUser } from '../../redux/actions/User Actions';
+import FormGroup from '../layouts/formGroup';
 
 class Signup extends Component {
     constructor(props) {
@@ -23,6 +25,15 @@ class Signup extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     //==========================================================================
+    componentDidUpdate(prevProps) {
+        if (
+            !isEmpty(this.props.errors) &&
+            this.props.errors !== prevProps.errors &&
+            this.props.errors !== 'Unauthorized'
+        )
+            this.setState({ errors: this.props.errors });
+    }
+    //==========================================================================
     onSubmit = e => {
         e.preventDefault();
         const { errors, ...newUser } = this.state;
@@ -32,6 +43,7 @@ class Signup extends Component {
     onChange = e => this.setState({ [e.target.name]: e.target.value });
     //==========================================================================
     render() {
+        const { name, email, password, password2, errors } = this.state;
         return (
             <div className="signup">
                 <div className="signup__heading">Signup to Continue!</div>
@@ -40,7 +52,6 @@ class Signup extends Component {
                         noValidate
                         className="signup__card__form"
                         onSubmit={this.onSubmit}>
-
                         <FormGroup
                             name="name"
                             type="text"
@@ -86,10 +97,10 @@ class Signup extends Component {
                         />
 
                         <div className="mt-4 mb-5">
-                            <div className="form__radio-group">
+                            <div className="form__radio__group">
                                 <input
                                     type="radio"
-                                    className="form__radio-input"
+                                    className="form__radio__input"
                                     id="male"
                                     name="gender"
                                     value="M"
@@ -97,16 +108,16 @@ class Signup extends Component {
                                 />
                                 <label
                                     htmlFor="male"
-                                    className="form__radio-label">
-                                    <span className="form__radio-button" />
+                                    className="form__radio__label">
+                                    <span className="form__radio__button" />
                                     Male
                                 </label>
                             </div>
 
-                            <div className="form__radio-group">
+                            <div className="form__radio__group">
                                 <input
                                     type="radio"
-                                    className="form__radio-input"
+                                    className="form__radio__input"
                                     id="female"
                                     name="gender"
                                     value="F"
@@ -114,16 +125,16 @@ class Signup extends Component {
                                 />
                                 <label
                                     htmlFor="female"
-                                    className="form__radio-label">
-                                    <span className="form__radio-button" />
+                                    className="form__radio__label">
+                                    <span className="form__radio__button" />
                                     Female
                                 </label>
                             </div>
 
-                            <div className="form__radio-group">
+                            <div className="form__radio__group">
                                 <input
                                     type="radio"
-                                    className="form__radio-input"
+                                    className="form__radio__input"
                                     id="other"
                                     name="gender"
                                     value="O"
@@ -131,8 +142,8 @@ class Signup extends Component {
                                 />
                                 <label
                                     htmlFor="other"
-                                    className="form__radio-label">
-                                    <span className="form__radio-button" />
+                                    className="form__radio__label">
+                                    <span className="form__radio__button" />
                                     Other
                                 </label>
                             </div>
@@ -145,10 +156,10 @@ class Signup extends Component {
                         </div>
 
                         <div className="mt-4 mb-5">
-                            <div className="form__radio-group">
+                            <div className="form__radio__group">
                                 <input
                                     type="radio"
-                                    className="form__radio-input"
+                                    className="form__radio__input"
                                     id="Student"
                                     name="role"
                                     value="Student"
@@ -156,16 +167,16 @@ class Signup extends Component {
                                 />
                                 <label
                                     htmlFor="Student"
-                                    className="form__radio-label">
-                                    <span className="form__radio-button" />
+                                    className="form__radio__label">
+                                    <span className="form__radio__button" />
                                     Student
                                 </label>
                             </div>
 
-                            <div className="form__radio-group">
+                            <div className="form__radio__group">
                                 <input
                                     type="radio"
-                                    className="form__radio-input"
+                                    className="form__radio__input"
                                     id="Instructor"
                                     name="role"
                                     value="Instructor"
@@ -173,8 +184,8 @@ class Signup extends Component {
                                 />
                                 <label
                                     htmlFor="Instructor"
-                                    className="form__radio-label">
-                                    <span className="form__radio-button" />
+                                    className="form__radio__label">
+                                    <span className="form__radio__button" />
                                     Instructor
                                 </label>
                             </div>
@@ -199,14 +210,14 @@ class Signup extends Component {
     }
 }
 //==========================================================================
-SignUp.propTypes = {
+Signup.propTypes = {
     createUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
 };
 //==========================================================================
 const mapStateToProps = state => ({
-    auth: state.auth,
+    user: state.user,
     errors: state.errors,
 });
 

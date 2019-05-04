@@ -6,7 +6,11 @@ import setAuthToken from '../../utils/setAuthToken';
 export const createUser = (newUser, history) => dispatch => {
     axios
         .post('/api/users/signup', newUser)
-        .then(res => history.push('/login'))
+        .then(res => {
+            const { password2, ...user } = newUser;
+            dispatch(setCurrentUser(user));
+            history.push('/profilePic');
+        })
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
@@ -15,7 +19,7 @@ export const createUser = (newUser, history) => dispatch => {
         );
 };
 
-export const loginUser = user => dispatch => {
+export const loginUser = (user, history) => dispatch => {
     axios
         .post('/api/users/login', user)
         .then(res => {
@@ -25,6 +29,7 @@ export const loginUser = user => dispatch => {
 
             const decoded = jwt_decode(token);
             dispatch(setCurrentUser(decoded));
+            history.push('/dashboard');
         })
         .catch(err =>
             dispatch({

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
-import { setCurrentUser } from './redux/actions/Auth Actions';
+import { setCurrentUser } from './redux/actions/User Actions';
 //-----------------------------------------------------------
 import store from './redux/store';
 //-----------------------------------------------------------
