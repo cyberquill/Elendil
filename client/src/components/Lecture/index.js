@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import isEmpty from '../../validation/isEmpty';
@@ -18,10 +18,6 @@ class Lecture extends Component {
             this.props.errors !== 'Unauthorized'
         )
             this.setState({ errors: this.props.errors });
-
-        /* 
-        if (isEmpty(this.props.questions))
-            this.props.history.push('/dashboard/course'); */
     }
     //==========================================================================
     render() {
@@ -29,15 +25,6 @@ class Lecture extends Component {
             this.props.history.push('/dashboard');
             return null;
         }
-
-        let {
-            name,
-            sno,
-            linkID,
-            date,
-            description,
-            resources,
-        } = this.props.lectures.activeLecture;
 
         let createLectureBtn = null;
         if (this.props.user.role === 'Instructor')
@@ -49,25 +36,40 @@ class Lecture extends Component {
                 </Link>
             );
 
-        let lectureList = this.props.lectures.list.map((lecture, index) => (
-            <LectureCard
-                name={lecture.name}
-                index={index}
-                linkID={lecture.linkID}
-                date={lecture.date}
-                key={index}
-            />
-        ));
-
         if (isEmpty(this.props.lectures.activeLecture))
             return (
-                <React.Fragment>
+                <Fragment>
                     <div className="lecture">
                         <h1 className="pt-1 mb-3">No Lectures yet...</h1>
                     </div>
                     {createLectureBtn}
-                </React.Fragment>
+                </Fragment>
             );
+
+        let {
+            name,
+            sno,
+            linkID,
+            date,
+            description,
+            resources,
+        } = this.props.lectures.activeLecture;
+
+        let lectureList = this.props.lectures.list.map((lecture, index) => (
+            <LectureCard
+                name={lecture.name}
+                linkID={lecture.linkID}
+                date={lecture.date}
+                index={index}
+                key={index}
+            />
+        ));
+
+        let resourceList = resources.map((resource, index) => (
+            <Link to={resource} key={index} className="lecture-left__resource">
+                Resource {index + 1}
+            </Link>
+        ));
 
         return (
             <div className="lecture">
@@ -83,10 +85,18 @@ class Lecture extends Component {
                         />
                     </div>
                     <div className="lecture-left__text">
-                        <h1 className="lecture-left__text-lect">
+                        <h1 className="lecture-left__text--lect">
                             Lecture {sno + 1}: {name}
                         </h1>
-                        <p className="lecture-left__text-desc">{description}</p>
+                        <div className="lecture-left__text--desc">
+                            Created at: {date}
+                        </div>
+                        <p className="lecture-left__text--desc">
+                            {description}
+                        </p>
+                    </div>
+                    <div className="lecture-left__resourceList">
+                        {resourceList}
                     </div>
                 </div>
                 <div className="lecture-right">
@@ -101,7 +111,6 @@ class Lecture extends Component {
 const mapStateToProps = state => ({
     activeCourse: state.courses.activeCourse,
     lectures: state.lectures,
-    questions: state.questions.list,
     user: state.user,
     errors: state.errors,
 });

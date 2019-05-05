@@ -49,7 +49,6 @@ router.get('/of/:qid',
             result.push(data);
         }
         res.json(result);
-        // res.json(answers);
     }
 );
 // ============================================================================

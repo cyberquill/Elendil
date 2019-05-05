@@ -68,7 +68,7 @@ class Dashboard extends Component {
                     <div className="dashboard__btn">
                         <Link
                             to="/dashboard/course/create"
-                            className="btn btn-lg btn-primary btn-outline-light">
+                            className="dashboard__btn--link">
                             Create Course
                         </Link>
                     </div>
@@ -81,13 +81,17 @@ class Dashboard extends Component {
                 <div className="dashboard__header">Instructor Dashboard</div>
                 <div className="dashboard__list">
                     <div className="dashboard__section--head">
-                        Your Courses:{' '}
+                        Your Courses:
+                    </div>
+                    <div className="courseCard-group">
+                        {ListCards}
                     </div>
                     {createCourseBtn}
-                    <div className="courseCard-group">{ListCards}</div>
                 </div>
                 <div className="dashboard__suggested">
-                    <div className="dashboard__section--head">Suggested: </div>
+                    <div className="dashboard__section--head">
+                        Suggested:
+                    </div>
                     <div className="courseCard-group pb-5">
                         {SuggestedCards}
                     </div>
@@ -99,7 +103,6 @@ class Dashboard extends Component {
 //==========================================================================
 const mapStateToProps = state => ({
     courses: state.courses,
-    // instructor: state.instructor,
     user: state.user,
     errors: state.errors,
 });

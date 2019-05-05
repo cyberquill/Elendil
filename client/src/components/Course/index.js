@@ -33,8 +33,16 @@ class Course extends Component {
             suggestions,
         } = this.props.activeCourse;
 
-        if (isEmpty(this.props.suggestions))
+        if (isEmpty(suggestions))
             suggestions.push('No suggestions yet...');
+
+        let addSuggestion = null;
+        if (this.props.user.role === 'Student')
+            addSuggestion = (
+                <Link to="#" className="course__suggestion--btn">
+                    Add Suggestions
+                </Link>
+            );
 
         const SuggestionList = suggestions.map((sg, index) => (
             <div className="course__suggestion" key={index}>
@@ -66,7 +74,9 @@ class Course extends Component {
                 </div>
 
                 <div className="course__btn-group">
-                    <Link to="#" className="course__btn">
+                    <Link
+                        to="/dashboard/course/payment"
+                        className="course__btn">
                         Price: ${price}
                     </Link>
                     <Link
@@ -83,6 +93,7 @@ class Course extends Component {
                 <section className="suggestion-list">
                     <div className="suggestion__heading">Suggestions :</div>
                     {SuggestionList}
+                    {addSuggestion}
                 </section>
             </div>
         );

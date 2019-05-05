@@ -39,7 +39,7 @@ router.get('/askedin/:cid',
         if(!questions)
             res.status(404).json([]);
         
-        /* 
+        
         const result = [];
         for(i=0; i<questions.length;i++)
         {
@@ -48,8 +48,7 @@ router.get('/askedin/:cid',
             data.user = { ...user._doc };
             result.push(data);
         }
-        res.json(result); */
-        res.json(questions);
+        res.json(result);
     }
 );
 // ============================================================================
