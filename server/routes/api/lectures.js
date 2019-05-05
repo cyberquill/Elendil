@@ -18,7 +18,7 @@ router.post('/create',
             res.status(400).json({ course: 'Course does not exist!' });
         
         let lecture = req.body;
-        lecture.linkID = lecture.linkID.slice(32);
+        lecture.linkID = lecture.link.slice(32);
         lecture.sno = exists.nLectures;
         lecture = new Lecture(lecture);
         lecture = await lecture.save();

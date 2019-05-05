@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import isEmpty from '../../validation/isEmpty';
-import CourseCard from '../layouts/CourseCard';
+import CourseCard from './CourseCard';
 import {
     getCourses,
     getSuggestedCourses,

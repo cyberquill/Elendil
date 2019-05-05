@@ -90,6 +90,7 @@ class Course extends Component {
 }
 //==============================================================================
 const mapStateToProps = state => ({
+    user: state.user,
     activeCourse: state.courses.activeCourse,
     errors: state.errors,
 });
