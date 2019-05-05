@@ -57,11 +57,11 @@ router.get(
     },
 );
 // ============================================================================
-//@route    GET: /api/courses/all
+//@route    GET: /api/courses/suggested/:cid
 //@desc     returns the list of all courses, sorted by the date created
 //@access   Private
 router.get(
-    '/all',
+    '/suggested/:cid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
         const courses = await Course.find({}, null, { sort: { date: 'desc' } });

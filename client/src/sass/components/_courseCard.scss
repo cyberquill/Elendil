@@ -1,0 +1,37 @@
+
+.courseCard {
+    position: relative;
+    width: 275px;
+    height: 400px;
+    padding: 10px;
+    margin: 20px;
+    transition: all 0.3s ease;
+
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 0px 20px 1px black;
+    }
+    
+    &-img {
+        height: 70%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &-group {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}

@@ -12,6 +12,8 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import NotFound from './components/NotFound';
+import Dashboard from './components/Dashboard';
+import Course from './components/Course';
 
 //===================================================================================
 //check for token:
@@ -31,6 +33,8 @@ class App extends Component {
                         <Route exact path="/" component={Home} />
                         <Route exact path="/signup" component={Signup} />
                         <Route exact path="/login" component={Login} />
+                        <Route exact path="/dashboard" component={Dashboard} />
+                        <Route exact path="/dashboard/course" component={Course} />
                         <Route component={NotFound} />
                     </Switch>
                 </Router>
