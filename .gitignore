@@ -2,6 +2,7 @@
 /node_modules
 
 /client/node_modules
+/client/src/assets
 /client/package-lock.json
 
 /server/.env

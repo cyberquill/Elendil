@@ -20,9 +20,11 @@ import Discussion from './components/Discussion';
 //===================================================================================
 //check for token:
 if (localStorage.jwtToken) {
-    setAuthToken(localStorage.jwtToken);
     const decoded = jwt_decode(localStorage.jwtToken);
-    store.dispatch(setCurrentUser(decoded));
+    if(Date.now() < decoded.exp) {
+        store.dispatch(setCurrentUser(decoded));
+        setAuthToken(localStorage.jwtToken);
+    }
 }
 //===================================================================================
 

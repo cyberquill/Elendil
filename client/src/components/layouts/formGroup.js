@@ -5,21 +5,21 @@ import classnames from 'classnames';
 const formGroup = ({ name, value, thumb, placeholder, type, onChange, error, others }) => {
     return (
         <div className={others}>
-            <div className="form__group">
-                <i className={`form__group__thumb fa-2x ${thumb}`} />
+            <div className="form-group">
+                <i className={`form-group__thumb ${thumb}`} />
                 <input
                     type={type}
                     name={name}
-                    className={classnames('form__group__input', {
-                        'form__invalid': error,
+                    className={classnames('form-group__input', {
+                        'form-invalid': error,
                     })}
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
                 />
-            <span className="rule"></span>
+                <div className="form-group__rule"></div>
             </div>
-            {error && <div className="form__invalid--msg">{error}</div>}
+            {error && <div className="form-invalid--msg">{error}</div>}
         </div>
     );
 };

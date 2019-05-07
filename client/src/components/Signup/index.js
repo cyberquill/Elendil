@@ -43,10 +43,16 @@ class Signup extends Component {
     onChange = e => this.setState({ [e.target.name]: e.target.value });
     //==========================================================================
     render() {
+        if (!isEmpty(this.props.user)) {
+            this.props.history.push('/dashboard');
+            return null;
+        }
+        
         const { name, email, password, password2, errors } = this.state;
         return (
+            <div className="signup__back">
             <div className="signup">
-                <div className="signup__heading">Signup to Continue!</div>
+                <div className="signup__display">Signup to Continue!</div>
                 <div className="signup__card">
                     <form
                         noValidate
@@ -60,7 +66,6 @@ class Signup extends Component {
                             value={name}
                             onChange={this.onChange}
                             error={errors.name}
-                            others="mt-5"
                         />
 
                         <FormGroup
@@ -71,7 +76,6 @@ class Signup extends Component {
                             value={email}
                             onChange={this.onChange}
                             error={errors.email}
-                            others="mt-5"
                         />
 
                         <FormGroup
@@ -82,7 +86,6 @@ class Signup extends Component {
                             value={password}
                             onChange={this.onChange}
                             error={errors.password}
-                            others="mt-5"
                         />
 
                         <FormGroup
@@ -93,14 +96,13 @@ class Signup extends Component {
                             value={password2}
                             onChange={this.onChange}
                             error={errors.password2}
-                            others="mt-5"
                         />
 
-                        <div className="mt-4 mb-5">
-                            <div className="form__radio__group">
+                        <div className="signup__card__form--radio">
+                            <div className="form-radioGroup">
                                 <input
                                     type="radio"
-                                    className="form__radio__input"
+                                    className="form-radioGroup__input"
                                     id="male"
                                     name="gender"
                                     value="M"
@@ -108,16 +110,16 @@ class Signup extends Component {
                                 />
                                 <label
                                     htmlFor="male"
-                                    className="form__radio__label">
-                                    <span className="form__radio__button" />
+                                    className="form-radioGroup__label">
+                                    <span className="form-radioGroup__button" />
                                     Male
                                 </label>
                             </div>
 
-                            <div className="form__radio__group">
+                            <div className="form-radioGroup">
                                 <input
                                     type="radio"
-                                    className="form__radio__input"
+                                    className="form-radioGroup__input"
                                     id="female"
                                     name="gender"
                                     value="F"
@@ -125,16 +127,16 @@ class Signup extends Component {
                                 />
                                 <label
                                     htmlFor="female"
-                                    className="form__radio__label">
-                                    <span className="form__radio__button" />
+                                    className="form-radioGroup__label">
+                                    <span className="form-radioGroup__button" />
                                     Female
                                 </label>
                             </div>
 
-                            <div className="form__radio__group">
+                            <div className="form-radioGroup">
                                 <input
                                     type="radio"
-                                    className="form__radio__input"
+                                    className="form-radioGroup__input"
                                     id="other"
                                     name="gender"
                                     value="O"
@@ -142,8 +144,8 @@ class Signup extends Component {
                                 />
                                 <label
                                     htmlFor="other"
-                                    className="form__radio__label">
-                                    <span className="form__radio__button" />
+                                    className="form-radioGroup__label">
+                                    <span className="form-radioGroup__button" />
                                     Other
                                 </label>
                             </div>
@@ -155,11 +157,11 @@ class Signup extends Component {
                             {errors.gender}
                         </div>
 
-                        <div className="mt-4 mb-5">
-                            <div className="form__radio__group">
+                        <div className="signup__card__form--radio">
+                            <div className="form-radioGroup">
                                 <input
                                     type="radio"
-                                    className="form__radio__input"
+                                    className="form-radioGroup__input"
                                     id="Student"
                                     name="role"
                                     value="Student"
@@ -167,16 +169,16 @@ class Signup extends Component {
                                 />
                                 <label
                                     htmlFor="Student"
-                                    className="form__radio__label">
-                                    <span className="form__radio__button" />
+                                    className="form-radioGroup__label">
+                                    <span className="form-radioGroup__button" />
                                     Student
                                 </label>
                             </div>
 
-                            <div className="form__radio__group">
+                            <div className="form-radioGroup">
                                 <input
                                     type="radio"
-                                    className="form__radio__input"
+                                    className="form-radioGroup__input"
                                     id="Instructor"
                                     name="role"
                                     value="Instructor"
@@ -184,8 +186,8 @@ class Signup extends Component {
                                 />
                                 <label
                                     htmlFor="Instructor"
-                                    className="form__radio__label">
-                                    <span className="form__radio__button" />
+                                    className="form-radioGroup__label">
+                                    <span className="form-radioGroup__button" />
                                     Instructor
                                 </label>
                             </div>
@@ -200,11 +202,12 @@ class Signup extends Component {
                         <input
                             type="submit"
                             value="Sign Up!"
-                            className="signup__card__btn"
+                            className="signup__card__form__btn"
                         />
                         <input type="hidden" name="_gotcha" />
                     </form>
                 </div>
+            </div>
             </div>
         );
     }

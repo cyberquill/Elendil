@@ -1,0 +1,73 @@
+
+.signup {
+    background-image: url(../assets/you-x-ventures-1442657-unsplash.jpg);
+    height: 80vh;
+    width: 100%;
+    background-size: cover;
+    border-radius: 15px;
+    box-shadow: 0px 0px 35px 5px rgba(0, 0, 0, 0.5);
+    z-index: 0;
+    display: flex;
+
+
+    &__back {
+        background-image: linear-gradient(to bottom right, #00c6fb, #005bea);
+        height: 100vh;
+        padding: 10vh 20vh;
+        z-index: -1;
+    }
+
+    &__display {
+        width: 60%;
+    }
+
+    &__card {
+        background: rgba(255, 255, 255, 0.87);
+        width: 40%;
+        height: 100%;
+        z-index: 10;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__form {
+            background-image: linear-gradient(to bottom right, #00c6fb, #005bea);
+            box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.65);
+            border-radius: 7px;
+            padding: 30px 40px;
+            width: 83%;
+            height: 87%;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            &--radio {
+                display: flex;
+                justify-content: space-around;
+            }
+
+            &__btn {
+                background: white;
+                border-radius: 20px;
+                color: #555;
+                font-size: 1.4rem;
+                padding: 5px 30px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                border: 1px solid transparent;
+                margin: 0 auto;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    padding: 5px 40px;
+                    background: #888;
+                    box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.5);
+                    color: white;
+                }
+            }
+        }
+    }
+}

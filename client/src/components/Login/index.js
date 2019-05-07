@@ -40,6 +40,11 @@ class Login extends Component {
     onChange = e => this.setState({ [e.target.name]: e.target.value });
     //==========================================================================
     render() {
+        if (!isEmpty(this.props.user)) {
+            this.props.history.push('/dashboard');
+            return null;
+        }
+
         const { email, password, errors } = this.state;
         return (
             <div className="login">

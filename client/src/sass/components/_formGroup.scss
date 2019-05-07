@@ -1,0 +1,115 @@
+
+.form {
+
+    &-group {
+        position: relative;
+        font-family: Arial, Helvetica, sans-serif;
+        border-bottom: 1.5px solid rgba(white, 0.4);
+        display: flex;
+
+        &__thumb {
+            display: inline-block;
+            width: 10%;
+            font-size: 23px;
+            transform: translateY(-3px);
+        }
+
+        &__input {
+            background: transparent !important;
+            color: white;
+            display: inline-block;
+            width: 90%;
+            padding-left: 3%;
+            letter-spacing: 1px;
+            font-size: inherit;
+            border: none;
+            
+
+            &::placeholder {
+                color: rgba(white, 0.6);
+                opacity: 1;
+                transition: all 0.3s ease;
+            }
+
+            &:-webkit-autofill {transition: all 10000s ease-in-out 0s;}
+
+            &:focus {
+                box-shadow: none;
+                outline: none;
+
+                &::placeholder {
+                    color: white;
+                }
+            }
+        }
+
+        &__rule {
+            position: absolute;
+            width: 25%;
+            left: 50%;
+            bottom: -4%;
+            border-bottom: 1.5px solid transparent;
+            transform: translateX(-50%) scaleX(1);
+            transition: all 0.5s ease;
+        }
+    }
+
+    &-radioGroup {
+        
+        &__input {
+            display: none;
+        }
+
+        &__label {
+            font-size: 1.15rem;
+            font-family: Arial, Helvetica, sans-serif;
+            cursor: pointer;
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        &__button {
+            height: 1.55rem;
+            width: 1.55rem;
+            border: 3.5px solid white;
+            border-radius: 50%;
+            display: inline-block;
+            position: absolute;
+            left: 0;
+
+            &::after {
+                content: "";
+                display: block;
+                opacity: 0;
+                height: 0.85rem;
+                width: 0.85rem;
+                border-radius: 100%;
+                background-color: white;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                transition: opacity .2s;
+            }
+        }
+
+        &__input:checked ~ &__label &__button::after {
+            opacity: 1;
+        }
+    }
+
+    &-invalid {
+        
+        &--msg {
+            font-size: 14px;
+            border-top: 2px solid red;
+            transform: translate(0.5px, -1.5px);
+        }
+    }
+}
+
+
+.form-group__input:focus ~ .form-group__rule {
+    border-bottom: 1.5px solid white;
+    transform: translateX(-50%) scaleX(4);
+}
