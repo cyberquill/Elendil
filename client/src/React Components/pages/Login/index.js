@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import authTokenPresent from '../../../utils/authTokenPresent';
 import isEmpty from '../../../validation/isEmpty';
 import FormGroup from '../../components/FormGroup';
 import { loginUser } from '../../../redux/actions/User Actions';
@@ -40,7 +41,7 @@ class Login extends Component {
     onChange = e => this.setState({ [e.target.name]: e.target.value });
     //==========================================================================
     render() {
-        if (!isEmpty(this.props.user)) {
+        if (authTokenPresent() || !isEmpty(this.props.user)) {
             this.props.history.push('/dashboard');
             return null;
         }

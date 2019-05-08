@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import jwt_decode from 'jwt-decode';
-import setAuthToken from './utils/setAuthToken';
+import checkAuthToken from './utils/authTokenPresent';
 import { setCurrentUser } from './redux/actions/User Actions';
+
 //-----------------------------------------------------------
 import store from './redux/store';
 //-----------------------------------------------------------
@@ -18,14 +18,9 @@ import Lecture      from './React Components/pages/Lecture';
 import Discussion   from './React Components/pages/Discussion';
 
 //===================================================================================
-//check for token:
-if (localStorage.jwtToken) {
-    const decoded = jwt_decode(localStorage.jwtToken);
-    if(Date.now() < decoded.exp) {
-        store.dispatch(setCurrentUser(decoded));
-        setAuthToken(localStorage.jwtToken);
-    }
-}
+const token = checkAuthToken();           //check for existing token.
+if(token)
+    store.dispatch(setCurrentUser(token));
 //===================================================================================
 
 class App extends Component {
