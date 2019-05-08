@@ -1,5 +1,10 @@
 
-@import url('https://fonts.googleapis.com/css?family=Lato:400,900|Roboto+Condensed');
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script|Raleway');
+
+@font-face {
+   src: url(../fonts/Elianto.otf);
+   font-family: elianto;
+}
 
 @import "abstracts/functions";
 @import "abstracts/mixins";
@@ -15,3 +20,4 @@
 
 @import "pages/dashboard";
 @import "pages/signup";
+@import "pages/login";

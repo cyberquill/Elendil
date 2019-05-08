@@ -47,84 +47,90 @@ class Login extends Component {
 
         const { email, password, errors } = this.state;
         return (
-            <div className="login">
-                <div className="login__heading">Log In!</div>
-                <div className="login__card">
-                    <form
-                        noValidate
-                        className="login__card__form"
-                        onSubmit={this.onSubmit}>
-                        <FormGroup
-                            name="email"
-                            type="email"
-                            thumb="fas fa-envelope"
-                            placeholder="E-mail"
-                            value={email}
-                            onChange={this.onChange}
-                            error={errors.email}
-                            others="mt-4"
-                        />
+            <div className="login__back">
+                <div className="login">
+                    <div className="login__display">Login to Continue!</div>
+                    <div className="login__card">
+                        <form
+                            noValidate
+                            className="login__card__form"
+                            onSubmit={this.onSubmit}>
+                            
+                            <div className="login__card__form__heading">Login</div>
 
-                        <FormGroup
-                            name="password"
-                            type="password"
-                            thumb="fas fa-lock"
-                            placeholder="Password"
-                            value={password}
-                            onChange={this.onChange}
-                            error={errors.password}
-                            others="mt-4 mb-5"
-                        />
+                            <FormGroup
+                                name="email"
+                                type="email"
+                                thumb="fas fa-envelope"
+                                placeholder="E-mail"
+                                value={email}
+                                onChange={this.onChange}
+                                error={errors.email}
+                                others="mt-4"
+                            />
 
-                        <div className="mt-4 mb-5">
-                            <div className="form__radio__group">
-                                <input
-                                    type="radio"
-                                    className="form__radio__input"
-                                    id="Student"
-                                    name="role"
-                                    value="Student"
-                                    onChange={this.onChange}
-                                />
-                                <label
-                                    htmlFor="Student"
-                                    className="form__radio__label">
-                                    <span className="form__radio__button" />
-                                    Student
-                                </label>
+                            <FormGroup
+                                name="password"
+                                type="password"
+                                thumb="fas fa-lock"
+                                placeholder="Password"
+                                value={password}
+                                onChange={this.onChange}
+                                error={errors.password}
+                                others="mt-4"
+                            />
+
+                            <div className="login__card__form--radio mt-4">
+                                <div className="form-radioGroup">
+                                    <input
+                                        type="radio"
+                                        className="form-radioGroup__input"
+                                        id="Student"
+                                        name="role"
+                                        value="Student"
+                                        onChange={this.onChange}
+                                    />
+                                    <label
+                                        htmlFor="Student"
+                                        className="form-radioGroup__label">
+                                        <span className="form-radioGroup__button" />
+                                        Student
+                                    </label>
+                                </div>
+
+                                <div className="form-radioGroup">
+                                    <input
+                                        type="radio"
+                                        className="form-radioGroup__input"
+                                        id="Instructor"
+                                        name="role"
+                                        value="Instructor"
+                                        onChange={this.onChange}
+                                    />
+                                    <label
+                                        htmlFor="Instructor"
+                                        className="form-radioGroup__label">
+                                        <span className="form-radioGroup__button" />
+                                        Instructor
+                                    </label>
+                                </div>
+                            </div>
+                            <div
+                                className={classnames('', {
+                                    'form__invalid--msg': errors.role,
+                                })}>
+                                {errors.role}
                             </div>
 
-                            <div className="form__radio__group">
-                                <input
-                                    type="radio"
-                                    className="form__radio__input"
-                                    id="Instructor"
-                                    name="role"
-                                    value="Instructor"
-                                    onChange={this.onChange}
-                                />
-                                <label
-                                    htmlFor="Instructor"
-                                    className="form__radio__label">
-                                    <span className="form__radio__button" />
-                                    Instructor
-                                </label>
-                            </div>
-                        </div>
-                        <div
-                            className={classnames('', {
-                                'form__invalid--msg': errors.role,
-                            })}>
-                            {errors.role}
-                        </div>
+                            <input
+                                type="submit"
+                                value="Log In!"
+                                className="login__card__form__btn"
+                            />
 
-                        <input
-                            type="submit"
-                            value="Log In!"
-                            className="login__card__btn"
-                        />
-                        <input type="hidden" name="_gotcha" />
-                    </form>
+                            <input type="hidden" name="_gotcha" />
+                        </form>
+                    </div>
                 </div>
             </div>
         );

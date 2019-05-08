@@ -1,6 +1,6 @@
 
-.signup {
-    background: white;
+.login {
+    background-image: url(../assets/you-x-ventures-1442657-unsplash.jpg);
     height: 80vh;
     width: 100%;
     background-size: cover;
@@ -18,29 +18,41 @@
     }
 
     &__display {
-        width: 65%;
+        width: 60%;
     }
 
     &__card {
-        background-image: linear-gradient(to bottom right, #00c6fb, #005bea);
-        width: 35%;
+        background: rgba(255, 255, 255, 0.87);
+        width: 40%;
         height: 100%;
         z-index: 10;
-        border: 10px solid white;
-        border-radius: 15px;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
 
         display: flex;
         justify-content: center;
         align-items: center;
 
         &__form {
-            
-            width: 80%;
-            height: 90%;
+            background-image: linear-gradient(to bottom right, #00c6fb, #005bea);
+            box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.65);
+            border-radius: 7px;
+            padding: 30px 40px;
+            width: 83%;
+            height: 87%;
             z-index: 20;
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
+
+            &__heading {
+                color: white;
+                font-size: 50px;
+                margin-bottom: 30px;
+                margin-top: 10px;
+                font-family: elianto;
+                text-transform: uppercase;
+                text-align: center;
+            }
 
             &--radio {
                 display: flex;
@@ -56,6 +68,7 @@
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 border: 1px solid transparent;
                 margin: 0 auto;
+                margin-top: 60px;
                 transition: all 0.3s ease;
 
                 &:hover {
