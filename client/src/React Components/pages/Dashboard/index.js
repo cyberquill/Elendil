@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import isEmpty from '../../validation/isEmpty';
-import CourseCard from './CourseCard';
+import isEmpty from '../../../validation/isEmpty';
+import CourseCard from '../../components/CourseCard';
 import {
     getCourses,
     getSuggestedCourses,
-} from '../../redux/actions/Course Actions';
+} from '../../../redux/actions/Course Actions';
 
 class Dashboard extends Component {
     //==========================================================================

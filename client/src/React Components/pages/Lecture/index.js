@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import isEmpty from '../../validation/isEmpty';
-import { getLectures } from '../../redux/actions/Lecture Actions';
-import LectureCard from './LectureCard';
+import isEmpty from '../../../validation/isEmpty';
+import { getLectures } from '../../../redux/actions/Lecture Actions';
+import LectureCard from '../../components/LectureCard';
 
 class Lecture extends Component {
     //==========================================================================

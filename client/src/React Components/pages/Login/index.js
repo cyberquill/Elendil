@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import FormGroup from '../layouts/formGroup';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser } from '../../redux/actions/User Actions';
-import isEmpty from '../../validation/isEmpty';
+import isEmpty from '../../../validation/isEmpty';
+import FormGroup from '../../components/FormGroup';
+import { loginUser } from '../../../redux/actions/User Actions';
 
 class Login extends Component {
     constructor() {

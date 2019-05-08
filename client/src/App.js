@@ -8,14 +8,14 @@ import { setCurrentUser } from './redux/actions/User Actions';
 import store from './redux/store';
 //-----------------------------------------------------------
 
-import Home from './components/Home';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import NotFound from './components/NotFound';
-import Dashboard from './components/Dashboard';
-import Course from './components/Course';
-import Lecture from './components/Lecture';
-import Discussion from './components/Discussion';
+import NotFound     from './React Components/pages/NotFound';
+import Home         from './React Components/pages/Home';
+import Signup       from './React Components/pages/Signup';
+import Login        from './React Components/pages/Login';
+import Dashboard    from './React Components/pages/Dashboard';
+import Course       from './React Components/pages/Course';
+import Lecture      from './React Components/pages/Lecture';
+import Discussion   from './React Components/pages/Discussion';
 
 //===================================================================================
 //check for token:

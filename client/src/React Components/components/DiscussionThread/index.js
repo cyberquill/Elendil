@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import isEmpty from '../../validation/isEmpty';
-import { selectLecture } from '../../redux/actions/Lecture Actions';
+import isEmpty from '../../../validation/isEmpty';
+import { selectQuestion } from '../../../redux/actions/Question Actions';
 
-class LectureCard extends Component {
+class DiscussionThread extends Component {
     //==========================================================================
     constructor(props) {
         super(props);
-        this.lectureHandler = this.lectureHandler.bind(this);
+        this.questionHandler = this.questionHandler.bind(this);
     }
     //==========================================================================
     componentDidUpdate(prevProps) {
@@ -20,36 +20,38 @@ class LectureCard extends Component {
             this.setState({ errors: this.props.errors });
     }
     //==========================================================================
-    lectureHandler = e => {
+    questionHandler = e => {
         e.preventDefault();
-        this.props.selectLecture(this.props.index);
+        this.props.selectQuestion(this.props.index);
     };
     //==========================================================================
     render() {
-        const { name, linkID, date } = this.props;
+        const { text, date, nAnswers, user } = this.props;
         return (
             <Link
-                to="/dashboard/course/lectures"
-                className="lcard"
-                onClick={this.lectureHandler}>
+                to="/dashboard/course/discussions/"
+                className="discussionthread"
+                onClick={this.questionHandler}>
                 <img
-                    src={`https://img.youtube.com/vi/${linkID}/maxresdefault.jpg`}
-                    alt="Lecture Thumb"
-                    className="lcard__thumb"
+                    src={user.profilePic}
+                    alt="Profile Pic"
+                    className="discussionthread__pic"
                 />
-                <div className="lcard__name">{name}</div>
-                <div className="lcard__date">{date}</div>
+                <div className="discussionthread__name">{user.name}</div>
+                <div className="discussionthread__date">{date}</div>
+                <div className="discussionthread__text">{text}</div>
+                <div className="discussionthread__number">{nAnswers}</div>
             </Link>
         );
     }
 }
 //==============================================================================
 const mapStateToProps = state => ({
-    lectures: state.lectures,
+    questions: state.questions,
     errors: state.errors,
 });
 
 export default connect(
     mapStateToProps,
-    { selectLecture },
-)(withRouter(LectureCard));
+    { selectQuestion },
+)(withRouter(DiscussionThread));

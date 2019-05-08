@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import isEmpty from '../../validation/isEmpty';
-import { selectQuestion } from '../../redux/actions/Question Actions';
+import isEmpty from '../../../validation/isEmpty';
+import { selectLecture } from '../../../redux/actions/Lecture Actions';
 
-class MainThread extends Component {
+class LectureCard extends Component {
     //==========================================================================
     constructor(props) {
         super(props);
-        this.questionHandler = this.questionHandler.bind(this);
+        this.lectureHandler = this.lectureHandler.bind(this);
     }
     //==========================================================================
     componentDidUpdate(prevProps) {
@@ -20,38 +20,36 @@ class MainThread extends Component {
             this.setState({ errors: this.props.errors });
     }
     //==========================================================================
-    questionHandler = e => {
+    lectureHandler = e => {
         e.preventDefault();
-        this.props.selectQuestion(this.props.index);
+        this.props.selectLecture(this.props.index);
     };
     //==========================================================================
     render() {
-        const { text, date, nAnswers, user } = this.props;
+        const { name, linkID, date } = this.props;
         return (
             <Link
-                to="/dashboard/course/discussions/"
-                className="mainthread"
-                onClick={this.questionHandler}>
+                to="/dashboard/course/lectures"
+                className="lcard"
+                onClick={this.lectureHandler}>
                 <img
-                    src={user.profilePic}
-                    alt="Profile Pic"
-                    className="mainthread__pic"
+                    src={`https://img.youtube.com/vi/${linkID}/maxresdefault.jpg`}
+                    alt="Lecture Thumb"
+                    className="lcard__thumb"
                 />
-                <div className="mainthread__name">{user.name}</div>
-                <div className="mainthread__date">{date}</div>
-                <div className="mainthread__text">{text}</div>
-                <div className="mainthread__number">{nAnswers}</div>
+                <div className="lcard__name">{name}</div>
+                <div className="lcard__date">{date}</div>
             </Link>
         );
     }
 }
 //==============================================================================
 const mapStateToProps = state => ({
-    questions: state.questions,
+    lectures: state.lectures,
     errors: state.errors,
 });
 
 export default connect(
     mapStateToProps,
-    { selectQuestion },
-)(withRouter(MainThread));
+    { selectLecture },
+)(withRouter(LectureCard));

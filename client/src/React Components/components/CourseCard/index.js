@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { selectCourse } from '../../redux/actions/Course Actions';
+import { selectCourse } from '../../../redux/actions/Course Actions';
 
 class CourseCard extends Component {
     constructor(props) {

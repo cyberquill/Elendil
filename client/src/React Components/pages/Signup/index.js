@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import isEmpty from '../../validation/isEmpty';
-import { createUser } from '../../redux/actions/User Actions';
-import FormGroup from '../layouts/formGroup';
+import isEmpty from '../../../validation/isEmpty';
+import FormGroup from '../../components/FormGroup';
+import { createUser } from '../../../redux/actions/User Actions';
 
 class Signup extends Component {
     constructor(props) {

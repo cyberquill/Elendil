@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import isEmpty from '../../validation/isEmpty';
-import MainThread from './MainThread';
+import isEmpty from '../../../validation/isEmpty';
+import DiscussionThread from '../../components/DiscussionThread';
 import {
     getQuestions,
     createQuestion,
-} from '../../redux/actions/Question Actions';
-import { getAnswers } from '../../redux/actions/Answer Actions';
+} from '../../../redux/actions/Question Actions';
+import { getAnswers } from '../../../redux/actions/Answer Actions';
 
 class Discussion extends Component {
     //==========================================================================
@@ -75,7 +75,7 @@ class Discussion extends Component {
         ));
 
         let threadList = this.props.questions.list.map((thread, index) => (
-            <MainThread
+            <DiscussionThread
                 text={thread.text}
                 date={thread.date}
                 nAnswers={thread.nAnswers}
