@@ -5,19 +5,23 @@ import isEmpty from '../../../validation/isEmpty';
 
 class SideBar extends Component {
     render() {
+        const { pathname } = this.props.location;
+        console.log(pathname);
+        if (pathname === '/signup' || pathname === '/login') return null;
+
         const { name, email, role, profilePic } = this.props.user;
 
         return (
             <section className="sidebar">
-                <div className="sidebar__img--wrapper">
-                    <img
-                        src={profilePic}
-                        className="sidebar__img"
-                        alt="profile Picture"
-                    />
-                </div>
+                <Link to="/" className="sidebar__heading">
+                    Elendil
+                </Link>
+                <img
+                    src={profilePic}
+                    className="sidebar__img"
+                    alt="profile Picture"
+                />
                 <div className="sidebar__name">{name}</div>
-                <div className="sidebar__email">{email}</div>
                 <div className="sidebar__role">{role}</div>
             </section>
         );

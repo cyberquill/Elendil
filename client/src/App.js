@@ -8,6 +8,8 @@ import { setCurrentUser } from './redux/actions/User Actions';
 import store from './redux/store';
 //-----------------------------------------------------------
 
+import SideBar      from './React Components/layouts/Sidebar';
+
 import NotFound     from './React Components/pages/NotFound';
 import Home         from './React Components/pages/Home';
 import Signup       from './React Components/pages/Signup';
@@ -28,6 +30,7 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <Router>
+                    <SideBar />
                     <Switch>
                         <Route exact path="/" component={Home} />
                         <Route exact path="/signup" component={Signup} />

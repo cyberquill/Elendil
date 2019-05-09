@@ -56,8 +56,9 @@ class Login extends Component {
                             noValidate
                             className="login__card__form"
                             onSubmit={this.onSubmit}>
-                            
-                            <div className="login__card__form__heading">Login</div>
+                            <div className="login__card__form__heading">
+                                Login
+                            </div>
 
                             <FormGroup
                                 name="email"
