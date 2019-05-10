@@ -7,7 +7,12 @@ class SideBar extends Component {
     render() {
         const { pathname } = this.props.location;
         console.log(pathname);
-        if (pathname === '/signup' || pathname === '/login') return null;
+        if (
+            pathname === '/' ||
+            pathname === '/signup' ||
+            pathname === '/login'
+        )
+            return null;
 
         const { name, email, role, profilePic } = this.props.user;
 

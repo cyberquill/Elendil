@@ -30,6 +30,7 @@ class Dashboard extends Component {
             return null;
         }
 
+        let data_carousel_1 = null;
         let SuggestedCards,
             ListCards = (
                 <div className="dashboard__section--empty">No Courses</div>
@@ -42,6 +43,7 @@ class Dashboard extends Component {
                         image={course.logo}
                         title={course.title}
                         about={course.about}
+                        price={course.price}
                         index={index}
                         area="suggested"
                         key={index}
@@ -50,11 +52,23 @@ class Dashboard extends Component {
             );
 
         if (!isEmpty(this.props.courses))
+            data_carousel_1 = this.props.courses.suggested.map(
+                (course, index) => {
+                    let data = {};
+                    data.img = course.cover;
+                    data.heading = course.title;
+                    data.desc = course.about;
+                    return data;
+                },
+            );
+
+        if (!isEmpty(this.props.courses))
             ListCards = this.props.courses.list.map((course, index) => (
                 <CourseCard
                     image={course.logo}
                     title={course.title}
                     about={course.about}
+                    price={course.price}
                     index={index}
                     area="list"
                     key={index}
@@ -64,35 +78,29 @@ class Dashboard extends Component {
         let createCourseBtn = null;
         if (this.props.user.role === 'Instructor')
             createCourseBtn = (
-                <React.Fragment>
-                    <div className="dashboard__btn">
-                        <Link
-                            to="/dashboard/course/create"
-                            className="dashboard__btn--link">
-                            Create Course
-                        </Link>
-                    </div>
-                    <div className="cardsheading">Your Courses: </div>
-                </React.Fragment>
+                <Link to="/dashboard/course/create" className="dashboard__btn">
+                    <i className="fas fa-plus-circle" />
+                    &nbsp;&nbsp;Create Course
+                </Link>
             );
 
         return (
             <section className="dashboard">
-                <div className="dashboard__header">Instructor Dashboard</div>
+                <div className="dashboard__heading">Dashboard</div>
+                <div className="dashboard__section-head">Your Courses:</div>
+                {createCourseBtn}
                 <div className="dashboard__list">
-                    <div className="dashboard__section--head">
-                        Your Courses:
-                    </div>
                     <div className="courseCard-group">
                         {ListCards}
+                        {ListCards}
+                        {ListCards}
+                        {ListCards}
                     </div>
-                    {createCourseBtn}
                 </div>
+                <div className="dashboard__section-head">Suggested:</div>
                 <div className="dashboard__suggested">
-                    <div className="dashboard__section--head">
-                        Suggested:
-                    </div>
-                    <div className="courseCard-group pb-5">
+                    <div className="courseCard-group">
+                        {SuggestedCards}
                         {SuggestedCards}
                     </div>
                 </div>

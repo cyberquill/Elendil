@@ -2,9 +2,10 @@
 .sidebar {
     width: 20vw;
     height: 100%;
-    background-image: linear-gradient(to bottom right, #00c6fb, #005bea);
+    background: linear-gradient(to bottom right, #00c6fb, #005bea);
     position: fixed;
     overflow-x: hidden;
+    z-index: 1000;
     box-shadow: 0 5px 25px 1px rgba(0, 0, 0, 0.9);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     display: flex;

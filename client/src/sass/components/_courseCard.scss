@@ -1,11 +1,13 @@
 
 .courseCard {
     position: relative;
-    width: 275px;
-    height: 400px;
-    padding: 10px;
-    margin: 20px;
+    width: 240px;
+    height: 320px;
+    margin: 15px;
     transition: all 0.3s ease;
+    box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.6);
+    color: #333;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
     display: flex;
     flex-direction: column;
@@ -13,18 +15,73 @@
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: .25rem;
+    border-radius: 3px;
 
     &:hover {
-        transform: scale(1.05);
-        box-shadow: 0px 0px 20px 1px black;
+        transform: scale(1.03);
+        box-shadow: 0px 10px 20px -5px rgba(0, 0, 0, 0.8);
     }
     
-    &-img {
-        height: 70%;
+    &__img {
+        height: 45%;
         object-fit: cover;
         object-position: center;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+
+    &__title {
+        position: relative;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        overflow: hidden;
+        height: 3rem;
+        margin: 0 10px;
+        text-align: justify;
+        text-align-last: center;
+
+        &:after {
+            content: "";
+            text-align: right;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 20%;
+            height: 1.2em;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+        }
+    }
+
+    &__desc {
+        position: relative;
+        font-size: 1rem;
+        line-height: 1rem;
+        overflow: hidden;
+        height: 5rem;
+        margin: 0 10px;
+        text-align: justify;
+        text-align-last: center;
+
+        &:after {
+            content: "";
+            text-align: right;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 20%;
+            height: 1.2em;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+        }
+    }
+
+    &__price {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 1.3rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 500;
+        margin: 0px 10px 5px 10px;
     }
 
     &-group {
