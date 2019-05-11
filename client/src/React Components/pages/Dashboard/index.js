@@ -80,7 +80,7 @@ class Dashboard extends Component {
         let createCourseBtn = null;
         if (this.props.user.role === 'Instructor')
             createCourseBtn = (
-                <Link to="/dashboard/course/create" className="dashboard__btn">
+                <Link to="/dashboard/course/create" className="elbtn__type1">
                     <i className="fas fa-plus-circle" />
                     &nbsp;&nbsp;Create Course
                 </Link>

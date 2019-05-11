@@ -1,0 +1,98 @@
+
+.course {
+    position: relative;
+    color: #333;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    &__cover {
+        width: 100%;
+        height: 40vh;
+        object-fit: cover;
+        object-position: center;
+        box-shadow: 5px 0px 25px 1px rgba(0, 0, 0, 0.9);
+    }
+
+    &__logo {
+        width: 40vh;
+        height: 30vh;
+        top: 40vh;
+        right: 5vw;
+        border: 10px solid white;
+        // box-shadow: 5px 0px 25px 1px rgba(0, 0, 0, 0.9);
+        transform: translateY(-50%);
+        position: absolute;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &__title {
+        margin-left: 2vw;
+        margin-top: 2vh;
+        height: 10rem;
+        width: 51.5vw;
+        font-size: 3rem;
+        overflow: hidden;
+        font-family: elianto;
+        color: transparent;
+        display: inline-block;
+        background: linear-gradient(to bottom right, #2998ff, #5643fa);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+
+    &__about {
+        font-size: 1.5rem;
+        margin-left: 2vw;
+        text-align: justify;
+        width: 95%;
+    }
+
+    &__group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin: 2vh 2vw;
+    }
+
+    &__info-group {
+        background: #ddd;
+        color: black;
+        font-size: 1.1rem;
+        font-family: sans-serif;
+        font-weight: 400;
+        padding: 1.5rem;
+        border-radius: 10px;
+    }
+
+    &__btn-group {
+        display: flex;
+        width: 42vw;
+        transform: translateY(10px);
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+}
+
+.suggestion {
+
+    background: #ddd;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 5px; 
+    font-size: 1.15rem;   
+
+    &-list {
+        margin: 5vh 2vw;
+    }
+
+    &__heading {
+        font-size: 2.3rem;
+        text-transform: uppercase;
+        color: transparent;
+        display: inline-block;
+        background: linear-gradient(to left, #fc00ff, #00dbde);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+}
