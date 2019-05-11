@@ -12,7 +12,6 @@ class Dashboard extends Component {
     //==========================================================================
     componentDidMount() {
         this.props.getCourses(this.props.user.id);
-        this.props.getSuggestedCourses(this.props.user.id);
     }
     //==========================================================================
     componentDidUpdate(prevProps) {
@@ -22,6 +21,11 @@ class Dashboard extends Component {
             this.props.errors !== 'Unauthorized'
         )
             this.setState({ errors: this.props.errors });
+
+        if (
+            isEmpty(this.props.courses.suggested)
+        )
+            this.props.getSuggestedCourses(this.props.user.id);
     }
     //==========================================================================
     render() {
@@ -90,19 +94,11 @@ class Dashboard extends Component {
                 <div className="dashboard__section-head">Your Courses:</div>
                 {createCourseBtn}
                 <div className="dashboard__list">
-                    <div className="courseCard-group">
-                        {ListCards}
-                        {ListCards}
-                        {ListCards}
-                        {ListCards}
-                    </div>
+                    <div className="courseCard-group">{ListCards}</div>
                 </div>
                 <div className="dashboard__section-head">Suggested:</div>
                 <div className="dashboard__suggested">
-                    <div className="courseCard-group">
-                        {SuggestedCards}
-                        {SuggestedCards}
-                    </div>
+                    <div className="courseCard-group">{SuggestedCards}</div>
                 </div>
             </section>
         );

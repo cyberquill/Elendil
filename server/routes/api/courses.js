@@ -1,6 +1,6 @@
 const express = require('express'),
     passport = require('passport');
-const { Course, Instructor, Enroll } = require('../../models');
+const { Course, Instructor, Enroll, User } = require('../../models');
 // ============================================================================
 const router = express.Router();
 const validateCreateCourseInput = require('../../validation/createCourse');
@@ -34,12 +34,21 @@ router.get(
     '/createdby/:uid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        const { courses } = await Instructor.findOne({
-            uid: req.params.uid,
-        }).populate('courses');
+        const { courses } = await Instructor.findOne({uid: req.params.uid}).populate('courses',null,null,{sort: {'date': -1}}).lean();
 
-        if (!courses) res.status(404).json([]);
-        else res.json(courses);
+        if (!courses) {
+            res.status(404).json([]);
+            return;
+        }
+
+        const result = [];
+        for (i = 0; i < courses.length; i++) {
+            const Inst = await User.findById(courses[i].iid).select('name email profilePic -_id').lean();
+            const data = courses[i];
+            data.instructor = Inst;
+            result.push(data);
+        }
+        res.json(result);
     },
 );
 // ============================================================================
@@ -64,8 +73,20 @@ router.get(
     '/suggested/:cid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        const courses = await Course.find({}, null, { sort: { date: 'desc' } });
-        res.json(courses);
+        const courses = await Course.find({}).lean();
+
+        if (!courses) {
+            res.status(404).json([]);
+            return;
+        }
+
+        const result = [];
+        for (i = 0; i < courses.length; i++) {
+            const Inst = await User.findById(courses[i].iid).select('name email profilePic -_id').lean();
+            courses[i].instructor = Inst;
+            result.push(courses[i]);
+        }
+        res.json(result);
     },
 );
 // ============================================================================
