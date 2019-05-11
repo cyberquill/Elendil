@@ -20,13 +20,18 @@ class CourseCard extends Component {
     };
     //==========================================================================
     render() {
-        const { image, title, about, price } = this.props;
+        const { image, title, inst, price } = this.props;
         return (
-            <Link to="/" onClick={this.clickHandler}>
+            <Link to="/dashboard/course/" onClick={this.clickHandler}>
                 <div className="courseCard">
                     <img src={image} className="courseCard__img" alt="" />
                     <div className="courseCard__title">{title}</div>
-                    <div className="courseCard__desc">{about}</div>
+                    <img
+                        src={inst.profilePic}
+                        className="courseCard__inst-img"
+                        alt=""
+                    />
+                    <div className="courseCard__inst-name">{inst.name}</div>
                     <div className="courseCard__price">&#x20b9;{price}</div>
                 </div>
             </Link>

@@ -22,9 +22,7 @@ class Dashboard extends Component {
         )
             this.setState({ errors: this.props.errors });
 
-        if (
-            isEmpty(this.props.courses.suggested)
-        )
+        if (isEmpty(this.props.courses.suggested))
             this.props.getSuggestedCourses(this.props.user.id);
     }
     //==========================================================================
@@ -46,7 +44,7 @@ class Dashboard extends Component {
                     <CourseCard
                         image={course.logo}
                         title={course.title}
-                        about={course.about}
+                        inst={course.instructor}
                         price={course.price}
                         index={index}
                         area="suggested"
@@ -71,7 +69,7 @@ class Dashboard extends Component {
                 <CourseCard
                     image={course.logo}
                     title={course.title}
-                    about={course.about}
+                    inst={course.instructor}
                     price={course.price}
                     index={index}
                     area="list"
