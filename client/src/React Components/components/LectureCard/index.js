@@ -27,6 +27,14 @@ class LectureCard extends Component {
     //==========================================================================
     render() {
         const { name, linkID, date } = this.props;
+
+        let formatted = new Date(date).toLocaleDateString('en-UK', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
+
         return (
             <Link
                 to="/dashboard/course/lectures"
@@ -37,8 +45,10 @@ class LectureCard extends Component {
                     alt="Lecture Thumb"
                     className="lcard__thumb"
                 />
-                <div className="lcard__name">{name}</div>
-                <div className="lcard__date">{date}</div>
+                <div className="lcard__info">
+                    <div className="lcard__info__date">{formatted}</div>
+                    <div className="lcard__info__name">{name}</div>
+                </div>
             </Link>
         );
     }

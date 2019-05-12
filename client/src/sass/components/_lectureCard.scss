@@ -1,0 +1,60 @@
+
+.lcard {
+    
+    width: 100%;
+    height: 12.5vh;
+    position: relative;
+    margin: 10px 0;
+    border-radius: 4px;
+    display: flex;
+    box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 10px 20px -5px rgba(0, 0, 0, 0.8);
+    }
+
+    &__thumb {
+        height: 100%;
+        width: 46%;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &__info {
+        padding: 2px 10px;
+        width: 64%;
+        overflow: hidden;
+        
+        &__date {
+            color: #333;
+            text-align: right;
+            font-size: 0.7rem;
+            margin-bottom: 0.25rem;
+        }
+
+        &__name {
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1rem;
+            overflow: hidden;
+            height: 4rem;
+            text-align: justify;
+            color: #005bea;
+
+            &:after {
+                content: "";
+                text-align: right;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 35%;
+                height: 1.2em;
+                background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+            }
+        }
+    }
+}

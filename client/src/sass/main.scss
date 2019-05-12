@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css?family=Kaushan+Script|Raleway');
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
 
 @font-face {
    src: url(../fonts/Elianto.otf);
@@ -16,12 +16,14 @@
 @import "base/utilities";
 
 @import "components/courseCard";
-@import "components/button";
+@import "components/buttons";
 @import "components/formGroup";
+@import "components/lectureCard";
 
 @import "layouts/sidebar";
 
-@import "pages/dashboard";
 @import "pages/signup";
 @import "pages/login";
+@import "pages/dashboard";
 @import "pages/course";
+@import "pages/lectures";

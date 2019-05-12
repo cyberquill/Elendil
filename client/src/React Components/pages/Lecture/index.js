@@ -31,8 +31,9 @@ class Lecture extends Component {
             createLectureBtn = (
                 <Link
                     to="/dashboard/course/lectures/create"
-                    className="lecture-right__btn">
-                    Add Lectures
+                    className="elbtn__type1 mt-3">
+                    <i className="fas fa-plus-circle" />
+                    &nbsp;&nbsp;Add Lectures
                 </Link>
             );
 
@@ -54,6 +55,13 @@ class Lecture extends Component {
             description,
             resources,
         } = this.props.lectures.activeLecture;
+
+        let formatted = new Date(date).toLocaleDateString('en-UK', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
 
         let lectureList = this.props.lectures.list.map((lecture, index) => (
             <LectureCard
@@ -86,10 +94,10 @@ class Lecture extends Component {
                     </div>
                     <div className="lecture-left__text">
                         <h1 className="lecture-left__text--lect">
-                            Lecture {sno + 1}: {name}
+                            Lecture-{sno + 1}: {name}
                         </h1>
-                        <div className="lecture-left__text--desc">
-                            Created at: {date}
+                        <div className="lecture-left__text--date">
+                            Created on: {formatted}
                         </div>
                         <p className="lecture-left__text--desc">
                             {description}
@@ -99,6 +107,7 @@ class Lecture extends Component {
                         {resourceList}
                     </div>
                 </div>
+                <hr className="lecture__rule" />
                 <div className="lecture-right">
                     {createLectureBtn}
                     <div className="lecture-right__lecList">{lectureList}</div>
