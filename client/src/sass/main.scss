@@ -19,6 +19,8 @@
 @import "components/buttons";
 @import "components/formGroup";
 @import "components/lectureCard";
+@import "components/discussionThread";
+@import "components/convoBubble";
 
 @import "layouts/sidebar";
 
@@ -27,3 +29,4 @@
 @import "pages/dashboard";
 @import "pages/course";
 @import "pages/lectures";
+@import "pages/discussion";

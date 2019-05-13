@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import isEmpty from '../../../validation/isEmpty';
 import DiscussionThread from '../../components/DiscussionThread';
+import ConvoBubble from '../../components/ConvoBubble';
 import {
     getQuestions,
     createQuestion,
@@ -55,62 +56,44 @@ class Discussion extends Component {
                 </Fragment>
             );
 
-        let answerList = this.props.answers.list.map((answer, index) => (
-            <div className="discussion__active__answer" key={index}>
-                <img
-                    src={answer.user.profilePic}
-                    alt="Profile Pic"
-                    className="discussion__active__answer--pic"
-                />
-                <div className="discussion__active__answer--name">
-                    {answer.user.name}
-                </div>
-                <div className="discussion__active__answer--date">
-                    {answer.date}
-                </div>
-                <div className="discussion__active__answer--text">
-                    {answer.text}
-                </div>
-            </div>
-        ));
-
-        let threadList = this.props.questions.list.map((thread, index) => (
+        const threadList = this.props.questions.list.map((thread, index) => (
             <DiscussionThread
                 text={thread.text}
                 date={thread.date}
                 nAnswers={thread.nAnswers}
                 user={thread.user}
+                id={thread._id}
                 index={index}
                 key={index}
             />
         ));
 
-        let { text, date, user } = this.props.questions.activeQuestion;
+        this.props.answers.list.unshift(this.props.questions.activeQuestion);
+
+        const conversation = this.props.answers.list.map((convo, index) => {
+            let formatted = new Date(convo.date).toLocaleDateString('en-UK', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+            });
+
+            return (
+                <ConvoBubble
+                    key={index}
+                    date={formatted}
+                    name={convo.user.name}
+                    profilePic={convo.user.profilePic}
+                    text={convo.text}
+                    owner={this.props.questions.activeQuestion.user.name}
+                />
+            );
+        });
 
         return (
             <section className="discussion">
-                <div className="discussion__active">
-                    <div className="discussion__active__main">
-                        <img
-                            src={user.profilePic}
-                            alt="Profile Pic"
-                            className="discussion__active__main--pic"
-                        />
-                        <div className="discussion__active__main--name">
-                            {user.name}
-                        </div>
-                        <div className="discussion__active__main--date">
-                            {date}
-                        </div>
-                        <div className="discussion__active__main--text">
-                            {text}
-                        </div>
-                    </div>
-                </div>
-                <div className="discussion__active__answer-group">
-                    {answerList}
-                </div>
-                <div className="discussion__threads">{threadList}</div>
+                <div className="discussion-threads">{threadList}</div>
+                <div className="discussion-group">{conversation}</div>
             </section>
         );
     }

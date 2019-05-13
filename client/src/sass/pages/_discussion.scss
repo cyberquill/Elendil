@@ -1,0 +1,48 @@
+
+.discussion {
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    &-threads, &-group {
+        
+        width: 40%;
+        padding: 10px 20px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 25px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: linear-gradient(to bottom, #ccc, #333, #ccc);
+            border-left: 11px solid white;
+            border-right: 11px solid white;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #8e2de2, #4a00e0);
+            border-left: 4px solid white;
+            border-right: 4px solid white;
+            border-radius: 15px;
+        }
+    }
+
+    &-threads {
+        padding-left: 30px;
+    }
+
+    &-group {
+        width: 59.5%;
+        // box-shadow: 0 5px 25px 1px rgba(0, 0, 0, 0.9);
+    }
+}

@@ -22,25 +22,40 @@ class DiscussionThread extends Component {
     //==========================================================================
     questionHandler = e => {
         e.preventDefault();
-        this.props.selectQuestion(this.props.index);
+        if (this.props.id !== this.props.questions.activeQuestion._id)
+            this.props.selectQuestion(this.props.index);
     };
     //==========================================================================
     render() {
-        const { text, date, nAnswers, user } = this.props;
+        const { text, date, nAnswers, user, id } = this.props;
+
+        let formatted = new Date(date).toLocaleDateString('en-UK', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
+
+        const cls =
+            id === this.props.questions.activeQuestion._id
+                ? 'discThread--active'
+                : '';
+
         return (
             <Link
                 to="/dashboard/course/discussions/"
-                className="discussionthread"
+                className={`discThread ${cls}`}
                 onClick={this.questionHandler}>
                 <img
                     src={user.profilePic}
                     alt="Profile Pic"
-                    className="discussionthread__pic"
+                    className="discThread__pic"
                 />
-                <div className="discussionthread__name">{user.name}</div>
-                <div className="discussionthread__date">{date}</div>
-                <div className="discussionthread__text">{text}</div>
-                <div className="discussionthread__number">{nAnswers}</div>
+                <div className="discThread__info">
+                    <div className="discThread__info__number">{nAnswers}</div>
+                    <div className="discThread__info__name">{user.name}</div>
+                    <div className="discThread__info__text">{text}</div>
+                </div>
             </Link>
         );
     }
