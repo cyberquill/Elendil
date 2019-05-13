@@ -116,12 +116,13 @@ class Login extends Component {
                                         Instructor
                                     </label>
                                 </div>
-                            </div>
-                            <div
-                                className={classnames('', {
-                                    'form__invalid--msg': errors.role,
-                                })}>
-                                {errors.role}
+                            
+                                <div
+                                    className={classnames('', {
+                                        'form-radioGroup--invalid': errors.role,
+                                    })}>
+                                    {errors.role}
+                                </div>
                             </div>
 
                             <input

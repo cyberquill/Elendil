@@ -51,10 +51,16 @@
             border-bottom: 1.5px solid transparent;
             transform: translateX(-50%) scaleX(1);
             transition: all 0.5s ease;
+
+            &--invalid {
+                border-bottom: 2px solid red;
+                transform: translate(-50%, 1px) scaleX(4.1);
+            }
         }
     }
 
     &-radioGroup {
+        position: relative;
         
         &__input {
             display: none;
@@ -96,20 +102,30 @@
         &__input:checked ~ &__label &__button::after {
             opacity: 1;
         }
+
+        &--invalid {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            border-top: 2px solid red;
+            transform: translateY(75%);
+            text-align: center;
+            font-size: 0.8rem;
+        }
     }
 
-    &-invalid {
-        
-        &--msg {
-            font-size: 14px;
-            border-top: 2px solid red;
-            transform: translate(0.5px, -1.5px);
-        }
+    &__invalidMsg {
+        position: absolute;
+        text-align: center;
+        font-size: 0.75rem;
+        bottom: 0;
+        width: 100%;
+        transform: translateY(120%);
     }
 }
 
 
 .form-group__input:focus ~ .form-group__rule {
     border-bottom: 1.5px solid white;
-    transform: translateX(-50%) scaleX(4);
+    transform: translate(-50%, 1px) scaleX(4.1);
 }

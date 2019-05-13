@@ -2,7 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-const formGroup = ({ name, value, thumb, placeholder, type, onChange, error, others }) => {
+const formGroup = ({
+    name,
+    value,
+    thumb,
+    placeholder,
+    type,
+    onChange,
+    error,
+    others,
+}) => {
     return (
         <div className={others}>
             <div className="form-group">
@@ -10,16 +19,18 @@ const formGroup = ({ name, value, thumb, placeholder, type, onChange, error, oth
                 <input
                     type={type}
                     name={name}
-                    className={classnames('form-group__input', {
-                        'form-invalid': error,
-                    })}
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
+                    className="form-group__input"
                 />
-                <div className="form-group__rule"></div>
+                <div
+                    className={classnames('form-group__rule', {
+                        'form-group__rule--invalid': error,
+                    })}
+                />
+            {error && <div className="form__invalidMsg">{error}</div>}
             </div>
-            {error && <div className="form-invalid--msg">{error}</div>}
         </div>
     );
 };
@@ -32,7 +43,7 @@ formGroup.propTypes = {
     type: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     error: PropTypes.string,
-    others: PropTypes.string
+    others: PropTypes.string,
 };
 
 formGroup.defaultProps = {
