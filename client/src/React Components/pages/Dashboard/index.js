@@ -32,7 +32,6 @@ class Dashboard extends Component {
             return null;
         }
 
-        let data_carousel_1 = null;
         let SuggestedCards,
             ListCards = (
                 <div className="dashboard__section--empty">No Courses</div>
@@ -51,17 +50,6 @@ class Dashboard extends Component {
                         key={index}
                     />
                 ),
-            );
-
-        if (!isEmpty(this.props.courses))
-            data_carousel_1 = this.props.courses.suggested.map(
-                (course, index) => {
-                    let data = {};
-                    data.img = course.cover;
-                    data.heading = course.title;
-                    data.desc = course.about;
-                    return data;
-                },
             );
 
         if (!isEmpty(this.props.courses))

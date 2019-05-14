@@ -43,6 +43,19 @@
 
     &-group {
         width: 59.5%;
-        // box-shadow: 0 5px 25px 1px rgba(0, 0, 0, 0.9);
+    }
+
+    &--empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        color: #aaa;
+        font-size: 4rem;
+        padding-top: 4rem;
+
+        &__btn {
+            margin-top: 1rem;
+        }
     }
 }

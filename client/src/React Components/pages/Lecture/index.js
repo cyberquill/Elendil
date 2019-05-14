@@ -39,12 +39,12 @@ class Lecture extends Component {
 
         if (isEmpty(this.props.lectures.activeLecture))
             return (
-                <Fragment>
-                    <div className="lecture">
-                        <h1 className="pt-1 mb-3">No Lectures yet...</h1>
+                <div className="lecture--empty">
+                    <div className="lecture--empty__text">No Lectures yet...</div>
+                    <div className="lecture--empty__btn">
+                        {createLectureBtn}
                     </div>
-                    {createLectureBtn}
-                </Fragment>
+                </div>
             );
 
         let {

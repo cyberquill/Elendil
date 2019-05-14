@@ -6,7 +6,7 @@ import isEmpty from '../../../validation/isEmpty';
 class SideBar extends Component {
     render() {
         const { pathname } = this.props.location;
-        console.log(pathname);
+
         if (
             pathname === '/' ||
             pathname === '/signup' ||
