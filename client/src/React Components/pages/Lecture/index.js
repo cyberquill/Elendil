@@ -2,8 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import isEmpty from '../../../validation/isEmpty';
-import { getLectures } from '../../../redux/actions/Lecture Actions';
 import LectureCard from '../../components/LectureCard';
+import LecturePopup from '../../components/LecturePopup';
+import { getLectures } from '../../../redux/actions/Lecture Actions';
 
 class Lecture extends Component {
     //==========================================================================
@@ -20,6 +21,12 @@ class Lecture extends Component {
             this.setState({ errors: this.props.errors });
     }
     //==========================================================================
+    lecturePopupHandler(e) {
+        const popup = document.getElementById('lecturePop');
+        popup.firstChild.classList.add('lecturePop__content--active');
+        popup.classList.add('lecturePop--active');
+    }
+    //==========================================================================
     render() {
         if (isEmpty(this.props.activeCourse)) {
             this.props.history.push('/dashboard');
@@ -29,18 +36,24 @@ class Lecture extends Component {
         let createLectureBtn = null;
         if (this.props.user.role === 'Instructor')
             createLectureBtn = (
-                <Link
-                    to="/dashboard/course/lectures/create"
-                    className="elbtn__type1 mt-3">
-                    <i className="fas fa-plus-circle" />
-                    &nbsp;&nbsp;Add Lectures
-                </Link>
+                <Fragment>
+                    <Link
+                        to="#LecturePop"
+                        className="elbtn__type1"
+                        onClick={this.lecturePopupHandler.bind(this)}>
+                        <i className="fas fa-plus-circle" />
+                        &nbsp;&nbsp;Create Course
+                    </Link>
+                    <LecturePopup />
+                </Fragment>
             );
 
         if (isEmpty(this.props.lectures.activeLecture))
             return (
                 <div className="lecture--empty">
-                    <div className="lecture--empty__text">No Lectures yet...</div>
+                    <div className="lecture--empty__text">
+                        No Lectures yet...
+                    </div>
                     <div className="lecture--empty__btn">
                         {createLectureBtn}
                     </div>
