@@ -42,7 +42,8 @@ class CoursePopup extends Component {
     //==========================================================================
     onChange = e => this.setState({ [e.target.name]: e.target.value });
     //==========================================================================
-    coursePopupClose(e) {
+    coursePopupClose = e => {
+        e.preventDefault();
         const popup = document.getElementById('coursePop');
         const btn = document.getElementById('coursePop--btn');
         if (e.target !== popup && e.target !== btn) return;
@@ -124,7 +125,7 @@ class CoursePopup extends Component {
 
                             <input
                                 type="submit"
-                                value="Submit"
+                                value="Create Course"
                                 id="coursePop--btn"
                                 className="elbtn__type2 mt-5"
                             />

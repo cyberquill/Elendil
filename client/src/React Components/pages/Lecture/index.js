@@ -21,7 +21,8 @@ class Lecture extends Component {
             this.setState({ errors: this.props.errors });
     }
     //==========================================================================
-    lecturePopupHandler(e) {
+    lecturePopupHandler = e => {
+        e.preventDefault();
         const popup = document.getElementById('lecturePop');
         popup.firstChild.classList.add('lecturePop__content--active');
         popup.classList.add('lecturePop--active');

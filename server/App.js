@@ -4,7 +4,6 @@ const
     express = require('express'),
     bodyParser = require('body-parser'),
 
-InstDashBRoutes = require('./routes/pages/instructor/dashboard'),
 { users, instructors, students, courses, lectures, 
     questions, answers } = require('./routes/api');
 require('dotenv').config();

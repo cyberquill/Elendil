@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import isEmpty from '../../../validation/isEmpty';
 import DiscussionThread from '../../components/DiscussionThread';
+import DiscussionBar from '../../components/DiscussionBar';
+import DiscPopup from '../../components/DiscPopup';
 import ConvoBubble from '../../components/ConvoBubble';
 import {
     getQuestions,
@@ -37,6 +39,13 @@ class Discussion extends Component {
         }
     }
     //==========================================================================
+    discPopupHandler = e => {
+        e.preventDefault();
+        const popup = document.getElementById('discPop');
+        popup.firstChild.classList.add('discPop__content--active');
+        popup.classList.add('discPop--active');
+    }
+    //==========================================================================
     render() {
         if (isEmpty(this.props.activeCourse)) {
             this.props.history.push('/dashboard');
@@ -44,12 +53,16 @@ class Discussion extends Component {
         }
 
         let createDiscussionBtn = (
-            <Link
-                to="/dashboard/course/discussions/create"
-                className="elbtn__type1 mt-3">
-                <i className="fas fa-plus-circle" />
-                &nbsp;&nbsp;Start new Discussion
-            </Link>
+            <Fragment>
+                <Link
+                    to="#LecturePop"
+                    className="elbtn__type1 mt-3"
+                    onClick={this.discPopupHandler.bind(this)}>
+                    <i className="fas fa-plus-circle" />
+                    &nbsp;&nbsp;Start new Discussion
+                </Link>
+                <DiscPopup />
+            </Fragment>
         );
 
         if (isEmpty(this.props.questions.activeQuestion))
@@ -117,7 +130,10 @@ class Discussion extends Component {
                     {createDiscussionBtn}
                     {threadList}
                 </div>
-                <div className="discussion-group">{conversation}</div>
+                <div className="discussion-group">
+                    {conversation}
+                    <DiscussionBar />
+                </div>
             </section>
         );
     }

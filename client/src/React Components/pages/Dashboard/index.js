@@ -27,11 +27,12 @@ class Dashboard extends Component {
             this.props.getSuggestedCourses(this.props.user.id);
     }
     //==========================================================================
-    coursePopupHandler(e) {
+    coursePopupHandler = e => {
+        e.preventDefault();
         const popup = document.getElementById('coursePop');
         popup.firstChild.classList.add('coursePop__content--active');
         popup.classList.add('coursePop--active');
-    }
+    };
     //==========================================================================
     render() {
         if (isEmpty(this.props.user)) {

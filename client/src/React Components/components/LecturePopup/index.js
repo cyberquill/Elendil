@@ -36,13 +36,13 @@ class LecturePopup extends Component {
     onSubmit = e => {
         e.preventDefault();
         const { errors, ...newLecture } = this.state;
-        console.log(newLecture);
         this.props.createLecture(newLecture, this.props.history);
     };
     //==========================================================================
     onChange = e => this.setState({ [e.target.name]: e.target.value });
     //==========================================================================
-    lecturePopupClose(e) {
+    lecturePopupClose = e => {
+        e.preventDefault();
         const popup = document.getElementById('lecturePop');
         const btn = document.getElementById('lecturePop--btn');
         if (e.target !== popup && e.target !== btn) return;
@@ -107,7 +107,7 @@ class LecturePopup extends Component {
 
                             <input
                                 type="submit"
-                                value="Submit"
+                                value="Create Lecture"
                                 id="lecturePop--btn"
                                 className="elbtn__type2 mt-5"
                             />
