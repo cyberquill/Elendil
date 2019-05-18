@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import isEmpty from '../../../validation/isEmpty';
 import CourseCard from '../../components/CourseCard';
+import CoursePopup from '../../components/CoursePopup';
 import {
     getCourses,
     getSuggestedCourses,
@@ -24,6 +25,12 @@ class Dashboard extends Component {
 
         if (isEmpty(this.props.courses.suggested))
             this.props.getSuggestedCourses(this.props.user.id);
+    }
+    //==========================================================================
+    coursePopupHandler(e) {
+        const popup = document.getElementById('coursePop');
+        popup.firstChild.classList.add('coursePop__content--active');
+        popup.classList.add('coursePop--active');
     }
     //==========================================================================
     render() {
@@ -68,10 +75,16 @@ class Dashboard extends Component {
         let createCourseBtn = null;
         if (this.props.user.role === 'Instructor')
             createCourseBtn = (
-                <Link to="/dashboard/course/create" className="elbtn__type1">
-                    <i className="fas fa-plus-circle" />
-                    &nbsp;&nbsp;Create Course
-                </Link>
+                <Fragment>
+                    <Link
+                        to="#coursePop"
+                        className="elbtn__type1"
+                        onClick={this.coursePopupHandler.bind(this)}>
+                        <i className="fas fa-plus-circle" />
+                        &nbsp;&nbsp;Create Course
+                    </Link>
+                    <CoursePopup />
+                </Fragment>
             );
 
         return (

@@ -205,7 +205,7 @@ class Signup extends Component {
                             <input
                                 type="submit"
                                 value="Sign Up!"
-                                className="signup__card__form__btn"
+                                className="elbtn__type2"
                             />
                             <input type="hidden" name="_gotcha" />
                         </form>

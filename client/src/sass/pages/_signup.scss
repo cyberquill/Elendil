@@ -47,25 +47,6 @@
                 display: flex;
                 justify-content: space-around;
             }
-
-            &__btn {
-                background: white;
-                border-radius: 20px;
-                color: #555;
-                font-size: 1.4rem;
-                padding: 5px 30px;
-                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                border: 1px solid transparent;
-                margin: 0 auto;
-                transition: all 0.3s ease;
-
-                &:hover {
-                    padding: 5px 40px;
-                    background: #888;
-                    box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.5);
-                    color: white;
-                }
-            }
         }
     }
 }

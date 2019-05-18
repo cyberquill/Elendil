@@ -82,7 +82,7 @@ class Login extends Component {
                                 others="mt-4"
                             />
 
-                            <div className="login__card__form--radio mt-4">
+                            <div className="login__card__form--radio mt-4 mb-5">
                                 <div className="form-radioGroup">
                                     <input
                                         type="radio"
@@ -116,7 +116,7 @@ class Login extends Component {
                                         Instructor
                                     </label>
                                 </div>
-                            
+
                                 <div
                                     className={classnames('', {
                                         'form-radioGroup--invalid': errors.role,
@@ -128,7 +128,7 @@ class Login extends Component {
                             <input
                                 type="submit"
                                 value="Log In!"
-                                className="login__card__form__btn"
+                                className="elbtn__type2"
                             />
 
                             <input type="hidden" name="_gotcha" />
