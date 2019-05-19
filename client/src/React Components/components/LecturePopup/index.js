@@ -42,7 +42,6 @@ class LecturePopup extends Component {
     onChange = e => this.setState({ [e.target.name]: e.target.value });
     //==========================================================================
     lecturePopupClose = e => {
-        e.preventDefault();
         const popup = document.getElementById('lecturePop');
         const btn = document.getElementById('lecturePop--btn');
         if (e.target !== popup && e.target !== btn) return;

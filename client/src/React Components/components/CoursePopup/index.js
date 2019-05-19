@@ -37,13 +37,13 @@ class CoursePopup extends Component {
     onSubmit = e => {
         e.preventDefault();
         const { errors, ...newCourse } = this.state;
+        console.log(newCourse);
         this.props.createCourse(newCourse, this.props.history);
     };
     //==========================================================================
     onChange = e => this.setState({ [e.target.name]: e.target.value });
     //==========================================================================
     coursePopupClose = e => {
-        e.preventDefault();
         const popup = document.getElementById('coursePop');
         const btn = document.getElementById('coursePop--btn');
         if (e.target !== popup && e.target !== btn) return;

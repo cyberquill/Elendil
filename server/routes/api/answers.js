@@ -7,7 +7,8 @@ const router = express.Router();
 //@route    POST: /api/answers/create
 //@desc     Post an answer
 //@access   Private
-router.post('/create',
+router.post(
+    '/create',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
         const exists = await Question.findById(req.body.qid);
@@ -25,31 +26,60 @@ router.post('/create',
         update['$inc']['nAnswers'] = 1;
         await Question.findByIdAndUpdate(exists.id, update, { new: true });
         res.json(a);
-    }
+    },
 );
 // ============================================================================
 //@route    POST: /api/answers/of/qid
 //@desc     Get a list of all answers for a given question.
 //@access   Private
-router.get('/of/:qid',
+router.get(
+    '/of/:qid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        const { answers } = await Question.findById(req.params.qid)
-            .populate('answers',null,null,{sort: {'sno': 1}});
+        const { answers } = await Question.findById(req.params.qid).populate(
+            'answers',
+            null,
+            null,
+            { sort: { sno: 1 } },
+        );
 
-        if(!answers)
-            res.status(404).json([]);
-        
+        if (!answers) res.status(404).json([]);
+
         const result = [];
-        for(i=0; i<answers.length;i++)
-        {
-            const user = await User.findById(answers[i].uid).select('name email role profilePic -_id');
-            const data = {...answers[i]._doc};
+        for (i = 0; i < answers.length; i++) {
+            const user = await User.findById(answers[i].uid).select(
+                'name email role profilePic -_id',
+            );
+            const data = { ...answers[i]._doc };
             data.user = { ...user._doc };
             result.push(data);
         }
         res.json(result);
-    }
+    },
+);
+// ============================================================================
+//@route    POST: /api/answers/delete/:qid
+//@desc     Deletes the specified course
+//@access   Private && Instructor
+router.get(
+    '/delete/:qid',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        let answer = await Answer.findById(req.params.qid);
+
+        if (!answer) {
+            res.status(404).json({ answer: 'Answer not found!' });
+            return;
+        }
+
+        if (toString(answer.uid) !== toString(req.user.id)) {
+            res.status(404).json({ answer: 'Unauthorized action!' });
+            return;
+        }
+
+        await Answer.findByIdAndDelete(answer.id);
+        res.json(answer);
+    },
 );
 // ============================================================================
 module.exports = router;
