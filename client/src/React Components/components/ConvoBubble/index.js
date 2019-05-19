@@ -1,22 +1,65 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
+import isEmpty from '../../../validation/isEmpty';
+import { deleteAnswers } from '../../../redux/actions/Answer Actions';
 
-export default function ConvoBubble(props) {
-    let type = 'passive';
+class ConvoBubble extends Component {
+    //==========================================================================
+    componentDidUpdate(prevProps) {
+        if (
+            !isEmpty(this.props.errors) &&
+            this.props.errors !== prevProps.errors &&
+            this.props.errors !== 'Unauthorized'
+        )
+            this.setState({ errors: this.props.errors });
+    }
+    //==========================================================================
+    deleteHandler = (aid, e) => {
+        this.props.deleteAnswers(aid);
+    };
+    //==========================================================================
+    render() {
+        const { name, owner, profilePic, date, aid, text } = this.props;
 
-    if (props.name === props.owner) type = 'active';
+        let type = 'passive';
+        if (name === owner) type = 'active';
 
-    return (
-        <div className={`convoBubble__${type}`}>
-            <img
-                src={props.profilePic}
-                alt="Profile Pic"
-                className={`convoBubble__${type}--pic`}
-            />
-            <div className={`convoBubble__${type}__box`}>
-                <div className={`convoBubble__${type}--name`}>{props.name}</div>
-                <div className={`convoBubble__${type}--date`}>{props.date}</div>
-                <div className={`convoBubble__${type}--text`}>{props.text}</div>
+        let deleteBtn = null;
+        if (name === this.props.user.name && aid !=="-1") {
+            deleteBtn = (
+                <button
+                    className={`convoBubble__${type}--delete`}
+                    onClick={this.deleteHandler.bind(this, aid)}>
+                    &times;
+                </button>
+            );
+        }
+
+        return (
+            <div className={`convoBubble__${type}`}>
+                <img
+                    src={profilePic}
+                    alt="Profile Pic"
+                    className={`convoBubble__${type}--pic`}
+                />
+                <div className={`convoBubble__${type}__box`}>
+                    <div className={`convoBubble__${type}--name`}>{name}</div>
+                    {deleteBtn}
+                    <div className={`convoBubble__${type}--date`}>{date}</div>
+                    <div className={`convoBubble__${type}--text`}>{text}</div>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
+//==============================================================================
+const mapStateToProps = state => ({
+    user: state.user,
+    errors: state.errors,
+});
+
+export default connect(
+    mapStateToProps,
+    { deleteAnswers },
+)(withRouter(ConvoBubble));

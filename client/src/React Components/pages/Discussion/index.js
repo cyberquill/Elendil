@@ -44,7 +44,7 @@ class Discussion extends Component {
         const popup = document.getElementById('discPop');
         popup.firstChild.classList.add('discPop__content--active');
         popup.classList.add('discPop--active');
-    }
+    };
     //==========================================================================
     render() {
         if (isEmpty(this.props.activeCourse)) {
@@ -91,21 +91,8 @@ class Discussion extends Component {
             />
         ));
 
-        if (this.props.answers.list[0]) {
-            if (
-                this.props.answers.list[0]._id !==
-                this.props.questions.activeQuestion._id
-            )
-                this.props.answers.list.unshift(
-                    this.props.questions.activeQuestion,
-                );
-        } else
-            this.props.answers.list.unshift(
-                this.props.questions.activeQuestion,
-            );
-
         const conversation = this.props.answers.list.map((convo, index) => {
-            let formatted = new Date(convo.date).toLocaleDateString('en-UK', {
+            const formatted = new Date(convo.date).toLocaleDateString('en-UK', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
@@ -119,10 +106,30 @@ class Discussion extends Component {
                     name={convo.user.name}
                     profilePic={convo.user.profilePic}
                     text={convo.text}
+                    aid={convo._id}
                     owner={this.props.questions.activeQuestion.user.name}
                 />
             );
         });
+
+        const { date, user, text, _id } = this.props.questions.activeQuestion;
+        const formatted = new Date(date).toLocaleDateString('en-UK', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
+
+        conversation.unshift(
+            <ConvoBubble
+                date={formatted}
+                name={user.name}
+                profilePic={user.profilePic}
+                text={text}
+                aid={"-1"}
+                owner={user.name}
+            />,
+        );
 
         return (
             <section className="discussion">

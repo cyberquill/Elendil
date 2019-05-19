@@ -58,14 +58,14 @@ router.get(
     },
 );
 // ============================================================================
-//@route    POST: /api/answers/delete/:qid
+//@route    DELETE: /api/answers/:aid
 //@desc     Deletes the specified course
 //@access   Private && Instructor
-router.get(
-    '/delete/:qid',
+router.delete(
+    '/:aid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        let answer = await Answer.findById(req.params.qid);
+        let answer = await Answer.findById(req.params.aid);
 
         if (!answer) {
             res.status(404).json({ answer: 'Answer not found!' });
