@@ -4,7 +4,6 @@
     "description": "An E-Learning website, based on the 'MERN' stack.",
     "main": "index.js",
     "scripts": {
-        "install": "npm install && cd client && npm install && cd ../server && npm install",
         "client": "cd client && npm start",
         "server": "cd server && npm start",
         "start": "run-p server client"
