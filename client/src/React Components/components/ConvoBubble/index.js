@@ -13,8 +13,6 @@ class ConvoBubble extends Component {
     }
     //==========================================================================
     deleteHandler = (aid, e) => {
-        console.log('called!');
-        console.log(aid);
         this.props.deleteAnswers(aid);
     };
     //==========================================================================

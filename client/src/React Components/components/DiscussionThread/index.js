@@ -26,8 +26,28 @@ class DiscussionThread extends Component {
             this.props.selectQuestion(this.props.index);
     };
     //==========================================================================
+    delPopupHandler() {
+        const popup = document.getElementById('discPop');
+        popup.firstChild.classList.add('discPop__content--active');
+        popup.classList.add('discPop--active');
+    }
+    //==========================================================================
     render() {
         const { text, date, nAnswers, user, id } = this.props;
+
+        let deleteBtn = null;
+        if (name === this.props.user.name && aid !== '-1') {
+            deleteBtn = (
+                <Fragment>
+                    <button
+                        className={`discThread__delete`}
+                        onClick={this.delPopupHandler}>
+                        &times;
+                    </button>
+                    <DeletePopup del={this.deleteHandler.bind(this, aid)} />
+                </Fragment>
+            );
+        }
 
         let formatted = new Date(date).toLocaleDateString('en-UK', {
             weekday: 'long',
@@ -53,6 +73,7 @@ class DiscussionThread extends Component {
                 />
                 <div className="discThread__info">
                     <div className="discThread__info__number">{nAnswers}</div>
+                    {deleteBtn}
                     <div className="discThread__info__name">{user.name}</div>
                     <div className="discThread__info__text">{text}</div>
                 </div>
