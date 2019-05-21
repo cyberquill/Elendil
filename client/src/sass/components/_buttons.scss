@@ -1,9 +1,8 @@
-
 .elbtn {
 
     &__type1 {
         background: linear-gradient(to bottom right, #2998ff, #5643fa);
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        border: none;
         padding: 10px 30px;
         border-radius: 50px;
         margin-bottom: 30px;
@@ -13,7 +12,7 @@
         display: inline-block;
         z-index: 10;
         box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.9);
-        
+
         &:hover {
             color: white;
             transform: scale(1.1);
@@ -28,7 +27,6 @@
         color: #555;
         font-size: 1.4rem;
         padding: 5px 30px;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         border: 1px solid transparent;
         margin: 0 auto;
         transition: all 0.3s ease;
@@ -38,6 +36,24 @@
             background: #888;
             box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.5);
             color: white;
+        }
+    }
+
+    &__type3 {
+        border: none;
+        background: #777;
+        color: white;
+        font-size: 1.3rem;
+        padding: 5px 40px;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.9);
+
+        &:hover {
+            background: white;
+            color: #2998ff;
+            font-weight: 600;
+            box-shadow: 0px 10px 20px -5px rgba(0, 0, 0, 0.8);
         }
     }
 }

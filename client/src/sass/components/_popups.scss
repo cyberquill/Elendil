@@ -1,5 +1,7 @@
-
-.coursePop, .discPop, .lecturePop {
+.coursePop,
+.discPop,
+.lecturePop,
+.delPop {
     height: 100vh;
     width: 100%;
     font-size: 1rem;
@@ -36,7 +38,7 @@
 
     &__card {
         &__form {
-            
+
             height: 80vh;
             padding: 10px 40px;
 
@@ -53,7 +55,7 @@
 }
 
 .lecturePop {
-    &__content { 
+    &__content {
         width: 25%;
     }
 
@@ -63,12 +65,35 @@
 }
 
 .discPop {
-    &__content { 
+    &__content {
         width: 35%;
         padding: 10px 20px;
     }
 
     &__card__form {
         height: 35vh;
+    }
+}
+
+.delPop {
+    &__content {
+        width: 25%;
+        padding: 10px 20px;
+    }
+
+    &__card {
+        padding: 30px;
+    }
+
+    &__heading {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    &__btn-group {
+        margin: 20px 0 10px 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
     }
 }
