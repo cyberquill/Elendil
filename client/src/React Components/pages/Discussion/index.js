@@ -84,8 +84,8 @@ class Discussion extends Component {
                 text={thread.text}
                 date={thread.date}
                 nAnswers={thread.nAnswers}
-                user={thread.user}
-                id={thread._id}
+                Quser={thread.user}
+                qid={thread._id}
                 index={index}
                 key={index}
             />

@@ -41,3 +41,14 @@ export const selectQuestion = index => dispatch => {
         payload: index,
     });
 };
+
+export const deleteQuestion = qid => dispatch => {
+    axios
+        .delete(`/api/questions/${qid}`)
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data,
+            }),
+        );
+};

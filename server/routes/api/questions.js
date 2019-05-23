@@ -57,11 +57,11 @@ router.get(
     },
 );
 // ============================================================================
-//@route    POST: /api/questions/delete/:qid
+//@route    DELETE: /api/questions/:qid
 //@desc     Deletes the specified course
 //@access   Private && Instructor
-router.get(
-    '/delete/:qid',
+router.delete(
+    '/:qid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
         let question = await Question.findById(req.params.qid).populate('answers');

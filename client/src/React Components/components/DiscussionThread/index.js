@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import isEmpty from '../../../validation/isEmpty';
-import { selectQuestion } from '../../../redux/actions/Question Actions';
+import DeletePopup from '../DeletePopup';
+import {
+    selectQuestion,
+    deleteQuestion,
+} from '../../../redux/actions/Question Actions';
 
 class DiscussionThread extends Component {
     //==========================================================================
@@ -26,17 +30,21 @@ class DiscussionThread extends Component {
             this.props.selectQuestion(this.props.index);
     };
     //==========================================================================
+    deleteHandler = (qid, e) => {
+        this.props.deleteQuestion(qid);
+    };
+    //==========================================================================
     delPopupHandler() {
-        const popup = document.getElementById('discPop');
-        popup.firstChild.classList.add('discPop__content--active');
-        popup.classList.add('discPop--active');
+        const popup = document.getElementById('delPop');
+        popup.firstChild.classList.add('delPop__content--active');
+        popup.classList.add('delPop--active');
     }
     //==========================================================================
     render() {
-        const { text, date, nAnswers, user, id } = this.props;
+        const { text, date, nAnswers, Quser, qid } = this.props;
 
         let deleteBtn = null;
-        if (name === this.props.user.name && aid !== '-1') {
+        if (Quser.name === this.props.user.name) {
             deleteBtn = (
                 <Fragment>
                     <button
@@ -44,7 +52,7 @@ class DiscussionThread extends Component {
                         onClick={this.delPopupHandler}>
                         &times;
                     </button>
-                    <DeletePopup del={this.deleteHandler.bind(this, aid)} />
+                    <DeletePopup del={this.deleteHandler.bind(this, qid)} />
                 </Fragment>
             );
         }
@@ -57,7 +65,7 @@ class DiscussionThread extends Component {
         });
 
         const cls =
-            id === this.props.questions.activeQuestion._id
+            qid === this.props.questions.activeQuestion._id
                 ? 'discThread--active'
                 : '';
 
@@ -67,14 +75,14 @@ class DiscussionThread extends Component {
                 className={`discThread ${cls}`}
                 onClick={this.questionHandler}>
                 <img
-                    src={user.profilePic}
+                    src={Quser.profilePic}
                     alt="Profile Pic"
                     className="discThread__pic"
                 />
                 <div className="discThread__info">
                     <div className="discThread__info__number">{nAnswers}</div>
                     {deleteBtn}
-                    <div className="discThread__info__name">{user.name}</div>
+                    <div className="discThread__info__name">{Quser.name}</div>
                     <div className="discThread__info__text">{text}</div>
                 </div>
             </Link>
@@ -83,11 +91,12 @@ class DiscussionThread extends Component {
 }
 //==============================================================================
 const mapStateToProps = state => ({
+    user: state.user,
     questions: state.questions,
     errors: state.errors,
 });
 
 export default connect(
     mapStateToProps,
-    { selectQuestion },
+    { selectQuestion, deleteQuestion },
 )(withRouter(DiscussionThread));
