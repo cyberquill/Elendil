@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ANSWERS_FETCHED, GET_ERRORS } from './types';
+import { resetDeletion } from './Delete Actions';
 
 export const createAnswer = (newAnswer, history) => dispatch => {
     axios
@@ -41,6 +42,9 @@ export const getAnswers = qid => dispatch => {
 export const deleteAnswers = aid => dispatch => {
     axios
         .delete(`/api/answers/${aid}`)
+        .then(res => {
+            resetDeletion();
+        })
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,

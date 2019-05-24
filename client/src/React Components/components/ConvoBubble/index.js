@@ -2,24 +2,21 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import isEmpty from '../../../validation/isEmpty';
-import DeletePopup from '../DeletePopup';
 import { deleteAnswers } from '../../../redux/actions/Answer Actions';
+import { triggerDeletion } from '../../../redux/actions/Delete Actions';
 
 class ConvoBubble extends Component {
     //==========================================================================
     componentDidUpdate(prevProps) {
-        if (!isEmpty(this.props.errors) && this.props.errors !== prevProps.errors && this.props.errors !== 'Unauthorized')
+        if (
+            !isEmpty(this.props.errors) &&
+            this.props.errors !== prevProps.errors &&
+            this.props.errors !== 'Unauthorized'
+        )
             this.setState({ errors: this.props.errors });
-    }
-    //==========================================================================
-    deleteHandler = (aid, e) => {
-        this.props.deleteAnswers(aid);
-    };
-    //==========================================================================
-    delPopupHandler() {
-        const popup = document.getElementById('delPop');
-        popup.firstChild.classList.add('delPop__content--active');
-        popup.classList.add('delPop--active');
+
+        if (!prevProps.approval && this.props.approval)
+            this.props.deleteAnswers(this.props.aid);
     }
     //==========================================================================
     render() {
@@ -31,18 +28,21 @@ class ConvoBubble extends Component {
         let deleteBtn = null;
         if (name === this.props.user.name && aid !== '-1') {
             deleteBtn = (
-                <Fragment>
-                    <button className={`convoBubble__${type}--delete`} onClick={this.delPopupHandler}>
-                        &times;
-                    </button>
-                    <DeletePopup del={this.deleteHandler.bind(this, aid)} />
-                </Fragment>
+                <button
+                    className={`convoBubble__${type}--delete`}
+                    onClick={this.props.triggerDeletion}>
+                    &times;
+                </button>
             );
         }
 
         return (
             <div className={`convoBubble__${type}`}>
-                <img src={profilePic} alt="Profile Pic" className={`convoBubble__${type}--pic`} />
+                <img
+                    src={profilePic}
+                    alt="Profile Pic"
+                    className={`convoBubble__${type}--pic`}
+                />
                 <div className={`convoBubble__${type}__box`}>
                     <div className={`convoBubble__${type}--name`}>{name}</div>
                     {deleteBtn}
@@ -56,10 +56,11 @@ class ConvoBubble extends Component {
 //==============================================================================
 const mapStateToProps = state => ({
     user: state.user,
+    approval: state.deletion.approval,
     errors: state.errors,
 });
 
 export default connect(
     mapStateToProps,
-    { deleteAnswers },
+    { deleteAnswers, triggerDeletion },
 )(withRouter(ConvoBubble));

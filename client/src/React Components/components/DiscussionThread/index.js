@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import isEmpty from '../../../validation/isEmpty';
-import DeletePopup from '../DeletePopup';
 import {
     selectQuestion,
     deleteQuestion,
@@ -34,26 +33,17 @@ class DiscussionThread extends Component {
         this.props.deleteQuestion(qid);
     };
     //==========================================================================
-    delPopupHandler() {
-        const popup = document.getElementById('delPop');
-        popup.firstChild.classList.add('delPop__content--active');
-        popup.classList.add('delPop--active');
-    }
-    //==========================================================================
     render() {
         const { text, date, nAnswers, Quser, qid } = this.props;
 
         let deleteBtn = null;
         if (Quser.name === this.props.user.name) {
             deleteBtn = (
-                <Fragment>
-                    <button
-                        className={`discThread__delete`}
-                        onClick={this.delPopupHandler}>
-                        &times;
-                    </button>
-                    <DeletePopup del={this.deleteHandler.bind(this, qid)} />
-                </Fragment>
+                <button
+                    className={`discThread__delete`}
+                    onClick={null}>
+                    &times;
+                </button>
             );
         }
 

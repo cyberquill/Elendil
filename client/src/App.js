@@ -9,6 +9,7 @@ import store from './redux/store';
 //-----------------------------------------------------------
 
 import SideBar      from './React Components/layouts/Sidebar';
+import DeletePopup from './React Components/layouts/DeletePopup';
 
 import NotFound     from './React Components/pages/NotFound';
 import Home         from './React Components/pages/Home';
@@ -41,6 +42,7 @@ class App extends Component {
                         <Route exact path="/dashboard/course/discussion" component={Discussion} />
                         <Route component={NotFound} />
                     </Switch>
+                    <DeletePopup />
                 </Router>
             </Provider>
         );
