@@ -65,6 +65,8 @@ router.delete(
     '/:aid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
+        console.log(req.params.aid);
+        
         let answer = await Answer.findById(req.params.aid);
 
         if (!answer) {

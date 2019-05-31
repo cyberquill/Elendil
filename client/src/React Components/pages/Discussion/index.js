@@ -98,7 +98,8 @@ class Discussion extends Component {
                 month: 'long',
                 day: 'numeric',
             });
-
+            console.log(convo._id);
+            
             return (
                 <ConvoBubble
                     key={index}

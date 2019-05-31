@@ -15,8 +15,14 @@ class ConvoBubble extends Component {
         )
             this.setState({ errors: this.props.errors });
 
-        if (!prevProps.approval && this.props.approval)
+        if (
+            !prevProps.deletion.approval &&
+            this.props.deletion.approval &&
+            this.props.deletion.id === this.props.aid
+        ) {
+            console.log('deleting');
             this.props.deleteAnswers(this.props.aid);
+        }
     }
     //==========================================================================
     render() {
@@ -30,7 +36,7 @@ class ConvoBubble extends Component {
             deleteBtn = (
                 <button
                     className={`convoBubble__${type}--delete`}
-                    onClick={this.props.triggerDeletion}>
+                    onClick={this.props.triggerDeletion.bind(this, aid)}>
                     &times;
                 </button>
             );
@@ -56,7 +62,7 @@ class ConvoBubble extends Component {
 //==============================================================================
 const mapStateToProps = state => ({
     user: state.user,
-    approval: state.deletion.approval,
+    deletion: state.deletion,
     errors: state.errors,
 });
 

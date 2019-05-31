@@ -6,6 +6,7 @@ import {
     selectQuestion,
     deleteQuestion,
 } from '../../../redux/actions/Question Actions';
+import { triggerDeletion } from '../../../redux/actions/Delete Actions';
 
 class DiscussionThread extends Component {
     //==========================================================================
@@ -21,16 +22,19 @@ class DiscussionThread extends Component {
             this.props.errors !== 'Unauthorized'
         )
             this.setState({ errors: this.props.errors });
+
+        if (
+            !prevProps.deletion.approval &&
+            this.props.deletion.approval &&
+            this.props.deletion.id === this.props.qid
+        )
+            this.props.deleteQuestion(this.props.qid);
     }
     //==========================================================================
     questionHandler = e => {
         e.preventDefault();
         if (this.props.id !== this.props.questions.activeQuestion._id)
             this.props.selectQuestion(this.props.index);
-    };
-    //==========================================================================
-    deleteHandler = (qid, e) => {
-        this.props.deleteQuestion(qid);
     };
     //==========================================================================
     render() {
@@ -41,7 +45,7 @@ class DiscussionThread extends Component {
             deleteBtn = (
                 <button
                     className={`discThread__delete`}
-                    onClick={null}>
+                    onClick={this.props.triggerDeletion.bind(this, qid)}>
                     &times;
                 </button>
             );
@@ -83,10 +87,11 @@ class DiscussionThread extends Component {
 const mapStateToProps = state => ({
     user: state.user,
     questions: state.questions,
+    deletion: state.deletion,
     errors: state.errors,
 });
 
 export default connect(
     mapStateToProps,
-    { selectQuestion, deleteQuestion },
+    { selectQuestion, deleteQuestion, triggerDeletion },
 )(withRouter(DiscussionThread));

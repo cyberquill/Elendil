@@ -22,6 +22,7 @@ class DeletePopup extends Component {
         setTimeout(() => {
             popup.classList.remove('delPop--active');
         }, 400);
+        //this.abort();
     };
     //==========================================================================
     proceed = e => this.props.approveDeletion();
