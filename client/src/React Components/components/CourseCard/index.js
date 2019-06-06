@@ -20,7 +20,8 @@ class CourseCard extends Component {
     };
     //==========================================================================
     render() {
-        const { image, title, inst, price } = this.props;
+        const { image, title, inst, price, cid, iid } = this.props;
+
         return (
             <Link to="/dashboard/course/" onClick={this.clickHandler}>
                 <div className="courseCard">
@@ -40,7 +41,6 @@ class CourseCard extends Component {
 }
 
 const mapStateToProps = state => ({
-    activeCourse: state.courses.activeCourse,
     errors: state.errors,
 });
 

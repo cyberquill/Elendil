@@ -46,7 +46,7 @@ class DiscussionThread extends Component {
                 <button
                     className={`discThread__delete`}
                     onClick={this.props.triggerDeletion.bind(this, qid)}>
-                    &times;
+                    <i class="fas fa-times-circle" />
                 </button>
             );
         }
@@ -77,7 +77,7 @@ class DiscussionThread extends Component {
                     <div className="discThread__info__number">{nAnswers}</div>
                     {deleteBtn}
                     <div className="discThread__info__name">{Quser.name}</div>
-                    <div className="discThread__info__text">{text}</div>
+                    <div className="discThread__info__text">{text} Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis harum commodi veniam error suscipit laboriosam explicabo, eveniet voluptatum ullam impedit obcaecati, accusantium minus vel quae vero ducimus nostrum unde quis earum consequuntur fugiat provident, esse molestiae labore. Cupiditate quidem, quia aliquam obcaecati aliquid voluptatum, voluptatibus laudantium, amet dignissimos delectus adipisci!</div>
                 </div>
             </Link>
         );

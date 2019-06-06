@@ -5,6 +5,7 @@ import {
     LECTURE_SELECTED,
     GET_ERRORS,
 } from './types';
+import { resetDeletion } from './Delete Actions';
 
 export const createLecture = (newLecture, history) => dispatch => {
     axios
@@ -57,4 +58,18 @@ export const selectLecture = index => dispatch => {
         type: LECTURE_SELECTED,
         payload: index,
     });
+};
+
+export const deleteLecture = lid => dispatch => {
+    axios
+        .delete(`/api/lectures/${lid}`)
+        .then(res => {
+            resetDeletion();
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data,
+            }),
+        );
 };

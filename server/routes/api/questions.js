@@ -28,7 +28,7 @@ router.post(
     },
 );
 // ============================================================================
-//@route    GET: /api/questions/askedin/cid
+//@route    GET: /api/questions/askedin/:cid
 //@desc     Get a list of questions asked in the given Course
 //@access   Private
 router.get(
@@ -77,11 +77,9 @@ router.delete(
         }
 
         const { answers } = question;
-
         if (answers) 
             answers.forEach(a => a.remove());
         
-
         await Question.findByIdAndDelete(question.id);
         res.json(question);
     },

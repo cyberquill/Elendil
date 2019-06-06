@@ -43,7 +43,7 @@ class Lecture extends Component {
                         className="elbtn__type1"
                         onClick={this.lecturePopupHandler.bind(this)}>
                         <i className="fas fa-plus-circle" />
-                        &nbsp;&nbsp;Create Course
+                        &nbsp;&nbsp;Create Lecture
                     </Link>
                     <LecturePopup />
                 </Fragment>
@@ -82,6 +82,7 @@ class Lecture extends Component {
                 name={lecture.name}
                 linkID={lecture.linkID}
                 date={lecture.date}
+                lid={lecture._id}
                 index={index}
                 key={index}
             />

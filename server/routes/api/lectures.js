@@ -64,11 +64,11 @@ router.get(
     },
 );
 // ============================================================================
-//@route    POST: /api/lectures/delete/:lid
+//@route    DELETE: /api/lectures/:lid
 //@desc     Deletes the specified lecture
 //@access   Private && Instructor
-router.get(
-    '/delete/:lid',
+router.delete(
+    '/:lid',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
         let lecture = await Lecture.findById(req.params.lid);

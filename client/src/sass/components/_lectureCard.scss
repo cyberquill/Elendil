@@ -25,7 +25,7 @@
     }
 
     &__info {
-        padding: 2px 10px;
+        padding: 2px 5px 2px 10px;
         width: 64%;
         overflow: hidden;
         
@@ -56,5 +56,14 @@
                 background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
             }
         }
+    }
+
+    &__delete {
+        border: none;
+        background: white;
+        color: #005bea;
+        font-size: 1rem;
+        transform: translateY(-5px);
+        float: right;
     }
 }

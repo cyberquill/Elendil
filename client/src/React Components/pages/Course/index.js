@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import isEmpty from '../../../validation/isEmpty';
+import { deleteCourse } from '../../../redux/actions/Course Actions';
+import { triggerDeletion } from '../../../redux/actions/Delete Actions';
 
 class Course extends Component {
     //==========================================================================
@@ -12,6 +14,13 @@ class Course extends Component {
             this.props.errors !== 'Unauthorized'
         )
             this.setState({ errors: this.props.errors });
+
+        if (
+            !prevProps.deletion.approval &&
+            this.props.deletion.approval &&
+            this.props.deletion.id === this.props.activeCourse._id
+        )
+            this.props.deleteCourse(this.props.activeCourse._id);
     }
     //==========================================================================
     render() {
@@ -20,7 +29,10 @@ class Course extends Component {
             return null;
         }
 
+        window.scrollTo(0, 0);
+
         const {
+            _id,
             title,
             about,
             logo,
@@ -40,6 +52,19 @@ class Course extends Component {
             month: 'long',
             day: 'numeric',
         });
+
+        let deleteBtn = null;
+        if (this.props.activeCourse.iid === this.props.user.id) {
+            deleteBtn = (
+                <Link
+                    to="#"
+                    className="elbtn__type1"
+                    onClick={this.props.triggerDeletion.bind(this, _id)}>
+                    <i class="fas fa-times-circle" />
+                    &nbsp; Delete Course
+                </Link>
+            );
+        }
 
         if (isEmpty(suggestions)) suggestions.push('No suggestions yet...');
 
@@ -62,19 +87,8 @@ class Course extends Component {
                 <img className="course__cover" src={cover} alt="Course Cover" />
                 <img className="course__logo" src={logo} alt="Course Logo" />
 
-                <div className="course__title">
-                    {title} Lorem ipsum, dolor sit amet consectetur adipisicing
-                    elit. Illo, nostrum?
-                </div>
-                <div className="course__about">
-                    {about} Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Dicta accusantium maxime voluptas ad. Unde accusantium
-                    neque reiciendis. Veritatis illo tenetur eius voluptate
-                    officiis eaque odit repellendus fugit quae quidem esse,
-                    voluptatem eveniet excepturi quas in repudiandae, nihil quis
-                    optio neque quam maxime nostrum sunt. Commodi ipsam at
-                    exercitationem excepturi a.
-                </div>
+                <div className="course__title">{title}</div>
+                <div className="course__about">{about}</div>
 
                 <div className="course__group">
                     <div className="course__info-group">
@@ -91,24 +105,40 @@ class Course extends Component {
                             Date Created:&emsp;{formatted}
                         </div>
                     </div>
-
-                    <div className="course__btn-group">
-                        <Link
-                            to="/dashboard/course/payment"
-                            className="elbtn__type1">
-                            Price: ${price}
-                        </Link>
-                        <Link
-                            to="/dashboard/course/lectures"
-                            className="elbtn__type1">
-                            View Lectures
-                        </Link>
-                        <Link
-                            to="/dashboard/course/discussion"
-                            className="elbtn__type1">
-                            Discussion Forum
-                        </Link>
+                    <div className="course__inst-group">
+                        <img
+                            src={instructor.profilePic}
+                            className="course__inst__img"
+                            alt="profile Picture"
+                        />
+                        <div className="course__inst--info">
+                            <div className="course__inst__name">
+                                {instructor.name}
+                            </div>
+                            <div className="course__inst__email">
+                                {instructor.email}
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <div className="course__btn-group">
+                    <Link
+                        to="/dashboard/course/payment"
+                        className="elbtn__type1">
+                        Price: ${price}
+                    </Link>
+                    <Link
+                        to="/dashboard/course/lectures"
+                        className="elbtn__type1">
+                        View Lectures
+                    </Link>
+                    <Link
+                        to="/dashboard/course/discussion"
+                        className="elbtn__type1">
+                        Discussion Forum
+                    </Link>
+                    {deleteBtn}
                 </div>
 
                 <section className="suggestion-list">
@@ -124,10 +154,11 @@ class Course extends Component {
 const mapStateToProps = state => ({
     user: state.user,
     activeCourse: state.courses.activeCourse,
+    deletion: state.deletion,
     errors: state.errors,
 });
 
 export default connect(
     mapStateToProps,
-    null,
+    { deleteCourse, triggerDeletion },
 )(withRouter(Course));
