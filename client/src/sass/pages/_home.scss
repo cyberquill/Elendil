@@ -1,0 +1,188 @@
+.home {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 75px;
+    justify-content: center;
+    // background-image: linear-gradient(to bottom right, #00c6fb, #005bea);
+    background-image: linear-gradient(to right bottom, #00c6fbd0, #005bead0), url(../assets/f.jfif);
+    // background-image: linear-gradient(to right bottom, #2998ff80, #5643fa80), url(../assets/photo-1434030216411-0b793f4b4173.jfif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0rem 2.5rem 3.75rem -1.875rem rgba(0, 0, 0, 1);
+
+    &--wrapper {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        padding: 10vh 10vw;
+        background: #fff;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        overflow: hidden;
+    }
+
+    &__heading {
+        font-size: 90px;
+        padding-left: 20px;
+        font-family: 'elianto';
+        text-transform: uppercase;
+    }
+
+    &__desc {
+        font-size: 20px;
+        transform: translateY(-50%);
+    }
+
+    &__btns {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding-top: 15px;
+        padding-right: 30px;
+        width: 12.5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &--btn {
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+
+            &:hover {
+                transform: scale(1.1);
+                color: white;
+                border-bottom: 1px solid white;
+            }
+        }
+    }
+
+    &__cube {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        transform-style: preserve-3d;
+        transform: translateZ(-75px) rotateY(0deg) rotateX(45deg) rotateZ(45deg);
+        animation: spinCube 5s linear infinite;
+
+        &--scene {
+            width: 150px;
+            height: 150px;
+            margin: 75px;
+            perspective: 1000px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+
+        &__face {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 1px solid black;
+            line-height: 150px;
+            font-size: 20px;
+            font-family: 'elianto';
+            text-transform: uppercase;
+            color: #333;
+            text-align: center;
+            backface-visibility: hidden;
+
+            &--frt {
+                background: white;
+                transform: rotateY(0deg) translateZ(75px);
+            }
+            &--bck {
+                background: white;
+                transform: rotateY(90deg) translateZ(75px);
+            }
+            &--rht {
+                background: white;
+                transform: rotateY(180deg) translateZ(75px);
+            }
+            &--lft {
+                background: white;
+                transform: rotateY(-90deg) translateZ(75px);
+            }
+            &--top {
+                background: white;
+                transform: rotateY(90deg) rotateX(90deg) translateZ(75px);
+            }
+            &--btm {
+                background: white;
+                transform: rotateX(-90deg) translateZ(75px);
+            }
+        }
+    }
+
+    &__wave {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+
+        &--itm {
+            width: 100%;
+            height: 72px;
+            background: url(../assets/wave.webp);
+            animation: wave 22s linear infinite;
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 72px;
+                top: 0;
+                left: 0;
+                opacity: 0.4;
+                background: url(../assets/wave.webp);
+                animation: wave 20s linear infinite reverse;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 72px;
+                top: 0;
+                left: 0;
+                opacity: 0.6;
+                background: url(../assets/wave.webp);
+                animation: wave 33s linear -4s infinite;
+            }
+        }
+
+        &--rect {
+            height: 20px;
+            background: white;
+        }
+    }
+}
+
+@keyframes wave {
+    0% {
+        background-position: 0;
+    }
+    100% {
+        background-position: 1360px;
+    }
+}
+
+@keyframes spinCube {
+    from {
+        transform: translateZ(-75px) rotateY(0deg) rotateX(45deg) rotateZ(45deg);
+    }
+    to {
+        transform: translateZ(-75px) rotateY(360deg) rotateX(45deg) rotateZ(45deg);
+    }
+}

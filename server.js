@@ -31,8 +31,10 @@ app.use('/api/lectures', lectures);
 app.use('/api/questions', questions);
 app.use('/api/answers', answers);
 //==========================================================================
-app.use(express.static(path.join(__dirname, 'client', 'build')));
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, 'client', 'build')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 app.listen(port, () => console.log(`Server Online on port ${port}...`));

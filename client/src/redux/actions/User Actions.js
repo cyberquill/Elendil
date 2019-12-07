@@ -9,7 +9,7 @@ export const createUser = (newUser, history) => dispatch => {
         .then(res => {
             const { password2, ...user } = newUser;
             dispatch(setCurrentUser(user));
-            history.push('/profilePic');
+            history.push('/dashboard');
         })
         .catch(err =>
             dispatch({

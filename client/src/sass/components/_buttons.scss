@@ -1,5 +1,4 @@
 .elbtn {
-
     &__type1 {
         background: linear-gradient(to bottom right, #2998ff, #5643fa);
         border: none;
@@ -32,7 +31,7 @@
         transition: all 0.3s ease;
 
         &:hover {
-            padding: 5px 40px;
+            transform: scaleX(1.1);
             background: #888;
             box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.5);
             color: white;

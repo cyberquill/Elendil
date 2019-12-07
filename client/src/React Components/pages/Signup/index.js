@@ -36,7 +36,8 @@ class Signup extends Component {
     //==========================================================================
     onSubmit = e => {
         e.preventDefault();
-        const { errors, ...newUser } = this.state;
+        let { errors, ...newUser } = this.state;
+        newUser.profilePic = 'https://res.cloudinary.com/brij1999/image/upload/v1575459234/user_black.png';
         this.props.createUser(newUser, this.props.history);
     };
     //==========================================================================

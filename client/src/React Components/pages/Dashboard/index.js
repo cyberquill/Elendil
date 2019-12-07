@@ -13,6 +13,7 @@ class Dashboard extends Component {
     //==========================================================================
     componentDidMount() {
         this.props.getCourses(this.props.user.id);
+        if (isEmpty(this.props.courses.suggested)) this.props.getSuggestedCourses(this.props.user.id);
     }
     //==========================================================================
     componentDidUpdate(prevProps) {
